@@ -1,0 +1,183 @@
+import { Button } from "@material-tailwind/react";
+
+export const Articles = () => {
+  return (
+    <div className="bg-[#0E0E0E] text-white">
+      <div className="container mx-auto">
+        <div className="flex justify-between py-4">
+          <h2 className="text-xl font-bold">Top News</h2>
+          <Button className="rounded-none border border-white">
+            Add Your News
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-3 gap-16 custom-grid text-center">
+          {/* first row */}
+          <div className="space-y-5">
+            {/* loop */}
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-full h-72"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-full h-72"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+          </div>
+          {/* first row end*/}
+          <div>
+            {/* loop */}
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-full h-40"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-full h-40"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-full h-40"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-full h-40"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+          </div>
+          {/* sencond row end */}
+          <div className="space-y-5">
+            {/* loop */}
+            <div className="flex">
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-40 h-28 mr-3"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div className="flex">
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-40 h-28 mr-3"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div className="flex">
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-40 h-28 mr-3"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div className="flex">
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-40 h-28 mr-3"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div className="flex">
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-40 h-28 mr-3"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div className="flex">
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-40 h-28 mr-3"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+            {/* loop */}
+            <div className="flex">
+              <img
+                src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2"
+                alt="ok"
+                className="w-40 h-28 mr-3"
+              />
+              <h2 className="text-lg my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit
+              </h2>
+            </div>
+            {/* loop end */}
+          </div>
+          {/* third row end */}
+        </div>
+      </div>
+    </div>
+  );
+};
