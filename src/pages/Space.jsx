@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Button } from "@material-tailwind/react";
 
 const data = Array.from({ length: 100 }, (_, index) => ({
@@ -25,7 +26,7 @@ export const Space = () => {
           <div className="flex flex-col h-full">
             {/* Image */}
             <img
-              src="http://localhost:5173/spacejob.png"
+              src={`${import.meta.env.BASE_URL}spacejob.png`}
               alt="Image"
               className="w-full h-[800px]"
             />
