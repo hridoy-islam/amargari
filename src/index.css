@@ -33,7 +33,7 @@ body {
   margin: 5px 0;
 }
 .custom-grid {
-  grid-template-columns: 45% 25% 35%;
+  grid-template-columns: 40% 20% 40%;
   font-weight: 700;
 }
 .custom-grid-space {
