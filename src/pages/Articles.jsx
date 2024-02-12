@@ -1,12 +1,22 @@
 import { Button } from "@material-tailwind/react";
+import { useContext } from "react";
+import { userContext } from "../contexts/MainContext";
 
 export const Articles = () => {
+  const { setArticle, setDialog } = useContext(userContext);
+  const handleArticle = () => {
+    setArticle(true);
+    setDialog(true);
+  };
   return (
     <div className="bg-[#0E0E0E] text-white overflow-x-hidden">
       <div className="container mx-auto max-w-screen-2xl">
         <div className="flex justify-between py-4">
           <h2 className="text-xl font-bold">Top News</h2>
-          <Button className="rounded-none border border-white">
+          <Button
+            onClick={() => handleArticle()}
+            className="rounded-none border border-white"
+          >
             Add Your News
           </Button>
         </div>

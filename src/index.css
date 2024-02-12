@@ -56,3 +56,22 @@ body {
 .searchinput::placeholder {
   color: #000;
 }
+.modalinput > label {
+  font-weight: 700;
+  width: 100%;
+  color: black;
+  margin-bottom: 2px;
+}
+.modalinput > input {
+  border: 2px solid black;
+  width: 100%;
+  padding: 6px 3px;
+  font-weight: 700;
+  color: #000;
+}
+
+.modalinput > textarea {
+  border: 2px solid black;
+  width: 100%;
+  padding: 6px 3px;
+}

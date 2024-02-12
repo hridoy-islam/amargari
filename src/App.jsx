@@ -1,9 +1,14 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./router/router";
+import MainContext from "./contexts/MainContext";
+import { Modal } from "./components/Modal";
 function App() {
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      <MainContext>
+        <RouterProvider router={router}></RouterProvider>
+        <Modal />
+      </MainContext>
     </>
   );
 }

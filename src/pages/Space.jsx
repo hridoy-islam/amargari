@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 import { Button } from "@material-tailwind/react";
+import { userContext } from "../contexts/MainContext";
+import { useContext } from "react";
 
 const data = Array.from({ length: 100 }, (_, index) => ({
   jobTitle: `Job Title ${index + 1}`,
@@ -18,6 +20,15 @@ const tableRows = data.map((entry, index) => (
 ));
 
 export const Space = () => {
+  const { setDialog, setLeaveCV, setJob } = useContext(userContext);
+  const handleCV = () => {
+    setLeaveCV(true);
+    setDialog(true);
+  };
+  const handleJob = () => {
+    setJob(true);
+    setDialog(true);
+  };
   return (
     <div className="bg-[#0E0E0E] text-white">
       <div className="grid grid-cols-2 gap-8 px-10 custom-grid-space">
@@ -46,10 +57,16 @@ export const Space = () => {
         {/* Right Side */}
         <div className="col-span-1 overflow-y-auto">
           <div className="flex gap-4">
-            <Button className="uppercase font-semibold w-full border border-white rounded-none">
+            <Button
+              onClick={() => handleCV()}
+              className="uppercase font-semibold w-full border border-white rounded-none"
+            >
               Leave Your CV
             </Button>
-            <Button className="uppercase font-semibold w-full border border-white rounded-none">
+            <Button
+              onClick={() => handleJob()}
+              className="uppercase font-semibold w-full border border-white rounded-none"
+            >
               Add Your Job
             </Button>
           </div>
