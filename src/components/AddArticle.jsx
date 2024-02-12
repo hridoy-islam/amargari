@@ -80,20 +80,24 @@ export const AddArticle = () => {
               </div>
 
               <div className="flex items-start gap-6 mt-3">
-                <input
-                  type="checkbox"
-                  className="w-10 h-10 border-2 border-black"
-                />
+                <div className="w-4">
+                  <input
+                    type="checkbox"
+                    className="border-2 border-black w-full h-full"
+                  />
+                </div>
                 <p className="text-black text-md font-bold">
                   I Request to move my article to the {`"TOP NEWS"`} section
                 </p>
               </div>
 
               <div className="flex items-start gap-6 mt-3">
-                <input
-                  type="checkbox"
-                  className="w-12 h-12 border-2 border-black"
-                />
+                <div className="h-4 w-4">
+                  <input
+                    type="checkbox"
+                    className="w-full h-full border-2 border-black"
+                  />
+                </div>
                 <p className="text-black text-sm">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Itaque incidunt tempora voluptatum, voluptate eum excepturi a

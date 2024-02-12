@@ -26,12 +26,14 @@ export const Modal = () => {
     <Dialog
       open={dialog}
       handler={handleOpen}
-      size="xxl"
+      size="xl"
       animate={{
         mount: { scale: 1, y: 0 },
         unmount: { scale: 0.9, y: -100 },
       }}
-      className="bg-white bg-opacity-95"
+      classNames="mt-8 mx-4"
+      fullwidth
+      //className="bg-white bg-opacity-95 mx-10 my-10 max-w-sceen-lg overflow-x-none"
     >
       {leaveCV && <LeaveYourCV />}
       {job && <AddYourJob />}

@@ -55,7 +55,7 @@ export const LeaveYourCV = () => {
                   What kind of job you are looking for?{" "}
                   {`(Department / Position/ Location)`}
                 </label>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <textarea name="" id="" cols="10" rows="4"></textarea>
               </div>
               <div className="modalinput">
                 <label htmlFor="">Add your cv {`(Max 5 MB)`}</label>
@@ -70,7 +70,7 @@ export const LeaveYourCV = () => {
               <div className="flex items-start gap-2">
                 <input
                   type="checkbox"
-                  className="w-12 h-12 border-2 border-black"
+                  className="w-4 h-4 border-2 border-black"
                 />
                 <p className="text-sm text-black">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -84,14 +84,14 @@ export const LeaveYourCV = () => {
                 <input
                   type="submit"
                   value={"leave your CV"}
-                  className="px-6 py-4 w-full capitalize bg-black text-white font-bold text-md cursor-pointer"
+                  className="px-6 py-4 w-full capitalize bg-black text-white font-bold text-md cursor-pointer my-2"
                 />
               </div>
             </form>
           </div>
           <div>
             <img
-              className="w-full h-auto p-10"
+              className="w-full max-h-screen p-10"
               src={`${import.meta.env.BASE_URL}cvimage.png`}
               alt=""
             />

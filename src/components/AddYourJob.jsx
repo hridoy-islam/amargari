@@ -83,7 +83,7 @@ export const AddYourJob = () => {
               <div className="flex items-start gap-6 mt-3">
                 <input
                   type="checkbox"
-                  className="w-12 h-12 border-2 border-black"
+                  className="w-4 h-4 border-2 border-black"
                 />
                 <p className="text-black text-sm">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
