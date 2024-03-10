@@ -2,7 +2,11 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "./node_modules/preline/preline.js",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -10,5 +14,5 @@ module.exports = withMT({
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [require("tailwind-scrollbar"), require("preline/plugin")],
 });

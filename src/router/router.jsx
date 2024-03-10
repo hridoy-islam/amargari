@@ -4,11 +4,7 @@ import { Home } from "../pages/Home";
 import { NotFound } from "../components/NotFound";
 import Main from "../layouts/main";
 import { Contact } from "../pages/Contact";
-import { Articles } from "../pages/Articles";
-import { Investors } from "../pages/Investors";
-import { Services } from "../pages/Services";
-import { Space } from "../pages/Space";
-import { Projects } from "../pages/Projects";
+import { CarWash } from "../pages/CarWash";
 
 const router = createBrowserRouter([
   {
@@ -20,24 +16,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/space-jobs",
-        element: <Space />,
-      },
-      {
-        path: "/articles",
-        element: <Articles />,
-      },
-      {
-        path: "/investors-hub",
-        element: <Investors />,
-      },
-      {
-        path: "/services",
-        element: <Services />,
-      },
-      {
-        path: "/projects",
-        element: <Projects />,
+        path: "/carwash",
+        element: <CarWash />,
       },
       {
         path: "/contact",
