@@ -56,13 +56,14 @@ export function Header() {
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
-            <a
+            <Link
+            top="/"
               className="flex-none text-xl font-semibold dark:text-white"
-              href="#"
+             
               aria-label="Brand"
             >
               Brand
-            </a>
+            </Link>
           </div>
 
           <div className="flex items-center ms-auto sm:ms-0 sm:order-3">
@@ -151,6 +152,14 @@ export function Header() {
               >
                 Car Wash
               </Link>
+
+              <Link
+                to={"/consultancy"}
+                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
+                aria-current="/consultancy"
+              >
+             Car Buying Consultancy
+              </Link>
               <Link
                 to={"/contact"}
                 className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
@@ -158,7 +167,13 @@ export function Header() {
               >
                 Contact
               </Link>
-
+              <Link
+                to={"/search"}
+                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
+                aria-current="page"
+              >
+               Search
+              </Link>
               <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
                 <button
                   type="button"

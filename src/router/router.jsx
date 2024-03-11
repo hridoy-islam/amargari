@@ -5,6 +5,10 @@ import { NotFound } from "../components/NotFound";
 import Main from "../layouts/main";
 import { Contact } from "../pages/Contact";
 import { CarWash } from "../pages/CarWash";
+import { Consultancy } from "../pages/Consultancy";
+import { Search } from "../pages/Search";
+import { Single } from "../pages/Single";
+import { Dashboard } from "../pages/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -20,8 +24,24 @@ const router = createBrowserRouter([
         element: <CarWash />,
       },
       {
+        path: "/consultancy",
+        element: < Consultancy />,
+      },
+      {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
+      },
+      {
+        path: "/single",
+        element: <Single />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
     ],
   },
