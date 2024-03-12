@@ -174,6 +174,27 @@ export function Header() {
               >
                Search
               </Link>
+              <Link
+                to={"/dashboard"}
+                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
+                aria-current="page"
+              >
+               Dashboard
+              </Link>
+              <Link
+                to={"/signin"}
+                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
+                aria-current="page"
+              >
+               Sign In
+              </Link>
+              <Link
+                to={"/signout"}
+                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
+                aria-current="page"
+              >
+               Sign Out
+              </Link>
               <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
                 <button
                   type="button"

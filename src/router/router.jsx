@@ -9,6 +9,8 @@ import { Consultancy } from "../pages/Consultancy";
 import { Search } from "../pages/Search";
 import { Single } from "../pages/Single";
 import { Dashboard } from "../pages/Dashboard";
+import { Signin } from "../pages/Signin";
+import { Signout } from "../pages/Signout";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/signin",
+        element: <Signin />,
+      },
+      {
+        path: "/signout",
+        element: <Signout />,
       },
     ],
   },
