@@ -1,5 +1,11 @@
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "./../features/Auth/authActions";
 export const Signin = () => {
+  const dispatch = useDispatch();
+  const handleLogin = () => {
+    dispatch(login({ username: "admin", password: "admin" }));
+  };
+
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-lg text-center">
@@ -11,7 +17,7 @@ export const Signin = () => {
         </p>
       </div>
 
-      <form action="#" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+      <form className="mx-auto mb-0 mt-8 max-w-md space-y-4">
         <div>
           <label htmlFor="email" className="sr-only">
             Email
@@ -89,7 +95,7 @@ export const Signin = () => {
           </p>
 
           <button
-            type="submit"
+            onClick={handleLogin}
             className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
           >
             Sign in
