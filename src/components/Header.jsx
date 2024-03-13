@@ -189,11 +189,11 @@ export function Header() {
                Sign In
               </Link>
               <Link
-                to={"/signout"}
+                to={"/signup"}
                 className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
                 aria-current="page"
               >
-               Sign Out
+               Sign Up
               </Link>
               <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
                 <button

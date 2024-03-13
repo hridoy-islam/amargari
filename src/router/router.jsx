@@ -10,7 +10,10 @@ import { Search } from "../pages/Search";
 import { Single } from "../pages/Single";
 import { Dashboard } from "../pages/Dashboard";
 import { Signin } from "../pages/Signin";
-import { Signout } from "../pages/Signout";
+import { Signup } from "../pages/Signup";
+import { Profile } from "../pages/Profile";
+import { Service } from "../pages/Service";
+import { Posts } from "../pages/Posts";
 
 const router = createBrowserRouter([
   {
@@ -50,8 +53,21 @@ const router = createBrowserRouter([
         element: <Signin />,
       },
       {
-        path: "/signout",
-        element: <Signout />,
+        path: "/Signup",
+        element: <Signup />,
+      },
+
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/Service",
+        element: <Service />,
+      },
+      {
+        path: "/Posts",
+        element: <Posts />,
       },
     ],
   },
