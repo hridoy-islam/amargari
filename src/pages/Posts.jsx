@@ -1,44 +1,145 @@
+
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 export const Posts = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
+  const dispatch = useDispatch();
+  const handleLogin = () => {
+    dispatch(login({ name: "name", email: "email" }));
+  };
+  
     return (
      <>
      
   
+<div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <div className="relative p-9 md:p-9">
 
-  <div className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
-    <div className="flex items-center py-4">
+    <div className="relative z-10 lg:grid lg:grid-cols-12 lg:gap-16 ">
+      <div className="mb-10 lg:mb-0 lg:col-span-9 lg:col-start-8 lg:order-2">
 
-      <button type="button" className="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar" aria-controls="application-sidebar" aria-label="Toggle navigation">
-        <span className="sr-only">Toggle Navigation</span>
-        <svg className="size-5" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-        </svg>
-      </button>
-   
 
-  
-      <ol className="ms-3 flex items-center whitespace-nowrap" aria-label="Breadcrumb">
-        <li className="flex items-center text-sm text-gray-800 dark:text-gray-400">
-          Application Layout
-          <svg className="flex-shrink-0 mx-3 overflow-visible size-2.5 text-gray-400 dark:text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </li>
-        <li className="text-sm font-semibold text-gray-800 truncate dark:text-gray-400" aria-current="page">
-          Dashboard
-        </li>
-      </ol>
+        <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 
-    </div>
-  </div>
+<div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
 
-  <div id="application-sidebar" className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700">
-    <div className="px-6">
-      <a className="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">Brand</a>
-    </div>
 
-    <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
-      <ul className="space-y-1.5">
+<form      onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Title</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("title")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Brand</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("brand")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Edition</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("edition")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Model</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("model")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Registration Year</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("registration_year")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Production Year</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("production_year")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Condition</label>
+          <select  type="text" id="hs-feedback-post-comment-name-1"  {...register("condition")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"  >
+          <option value="">Choose</option>
+        <option value="1">1</option>
+            </select>
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Transmition</label>
+          <select  type="text" id="hs-feedback-post-comment-name-1"  {...register("transmition")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"  >
+          <option value="">Choose</option>
+        <option value="1">1</option>
+            </select>
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Body Type</label>
+          <select  type="text" id="hs-feedback-post-comment-name-1"  {...register("bodyType")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"  >
+          <option value="">Choose</option>
+        <option value="1">1</option>
+            </select>
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Fuel Type</label>
+          <select  type="text" id="hs-feedback-post-comment-name-1"  {...register("fuelType")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"  >
+          <option value="">Choose</option>
+        <option value="1">1</option>
+            </select>
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Engine Capacity</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("engine_capacity")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Kilometer</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("kilometer")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Dtails</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("details")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">gallery</label>
+          <input type="file" id="hs-feedback-post-comment-name-1"  {...register("details")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Price</label>
+          <input type="text" id="hs-feedback-post-comment-name-1"  {...register("price")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">District</label>
+          <select  type="text" id="hs-feedback-post-comment-name-1"  {...register("district")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"  >
+          <option value="">Choose</option>
+        <option value="1">1</option>
+            </select>
+        </div>
+        <div className="mb-12 sm:mb-12">
+          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Upazila</label>
+          <select  type="text" id="hs-feedback-post-comment-name-1"  {...register("upazila")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"  >
+          <option value="">Choose</option>
+        <option value="1">1</option>
+            </select>
+        </div>
+      
+
+     
+
+
+        <div className="mt-6 grid">
+          <button type="submit "  onClick={handleLogin} className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Submit</button>
+        </div>
+      </form>
+
+
+</div>
+
+</div> 
+    
+      </div>
+
+
+      <div className="lg:col-span-3">
+        <div className="relative">
+       
+          <div>
+            <div id="tabs-with-card-1" role="tabpanel" aria-labelledby="tabs-with-card-item-1">
+             
+            <ul className="space-y-1.5">
         <li>
           <a className="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="dashboard">
             <svg className="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -72,50 +173,27 @@ export const Posts = () => {
      Your Post
         </a></li>
       </ul>
-    </nav>
-  </div>
+            </div>
 
-  <div className="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-
-<div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <div className="mx-auto max-w-2xl">
-    <div className="text-center">
-      <h2 className="text-xl text-gray-800 font-bold sm:text-3xl dark:text-white">
-   Posts
-      </h2>
-    </div>
-
-  
-    <div className="mt-5 p-4 relative z-10 bg-white border rounded-xl sm:mt-10 md:p-10 dark:bg-gray-800 dark:border-gray-700">
-      <form>
-        <div className="mb-4 sm:mb-8">
-          <label for="hs-feedback-post-comment-name-1" className="block mb-2 text-sm font-medium dark:text-white">Full name</label>
-          <input type="text" id="hs-feedback-post-comment-name-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Full name"/>
-        </div>
-
-        <div className="mb-4 sm:mb-8">
-          <label for="hs-feedback-post-comment-email-1" className="block mb-2 text-sm font-medium dark:text-white">Email address</label>
-          <input type="email" id="hs-feedback-post-comment-email-1" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Email address"/>
-        </div>
-
-        <div>
-          <label for="hs-feedback-post-comment-textarea-1" className="block mb-2 text-sm font-medium dark:text-white">Comment</label>
-          <div className="mt-1">
-            <textarea id="hs-feedback-post-comment-textarea-1" name="hs-feedback-post-comment-textarea-1" rows="3" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Leave your comment here..."></textarea>
           </div>
-        </div>
+     
+         
 
-        <div className="mt-6 grid">
-          <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Submit</button>
         </div>
-      </form>
+      </div>
+  
     </div>
 
+    <div className="absolute inset-0 grid grid-cols-12 size-full">
+      <div className="col-span-full lg:col-span-7 lg:col-start-6 bg-gray-100 w-full h-5/6 rounded-xl sm:h-3/4 lg:h-full dark:bg-white/[.075]"></div>
+    </div>
+ 
   </div>
 </div>
 
 
-  </div>
+
+
 
      
      </>
