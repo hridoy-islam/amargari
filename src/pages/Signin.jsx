@@ -1,6 +1,10 @@
 import { useDispatch } from "react-redux";
 import { login } from "./../features/Auth/authActions";
+import { useForm } from "react-hook-form";
 export const Signin = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   const dispatch = useDispatch();
   const handleLogin = () => {
     dispatch(login({ username: "admin", password: "admin" }));
@@ -17,7 +21,10 @@ export const Signin = () => {
         </p>
       </div>
 
-      <form className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+      <form
+        className="mx-auto mb-0 mt-8 max-w-md space-y-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div>
           <label htmlFor="email" className="sr-only">
             Email
@@ -28,6 +35,7 @@ export const Signin = () => {
               type="email"
               className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
               placeholder="Enter email"
+              {...register("email")}
             />
 
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -59,6 +67,7 @@ export const Signin = () => {
               type="password"
               className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
               placeholder="Enter password"
+              {...register("password")}
             />
 
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
