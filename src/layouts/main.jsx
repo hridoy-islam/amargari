@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { SignIn } from "../components/SignIn";
 import { SignUp } from "../components/SignUp";
+import { CarWashModal } from "../components/CarWashModal";
 
 const Main = () => {
   return (
@@ -12,6 +13,7 @@ const Main = () => {
       <Footer></Footer>
       <SignIn />
       <SignUp />
+      <CarWashModal />
     </div>
   );
 };

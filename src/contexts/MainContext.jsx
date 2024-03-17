@@ -7,12 +7,15 @@ export const userContext = createContext();
 const MainContext = ({ children }) => {
   const [signIn, setSignIn] = useState(false);
   const [signUp, setSignUp] = useState(false);
+  const [carWash, setCarWash] = useState(false);
 
   const info = {
     signIn,
     setSignIn,
     signUp,
     setSignUp,
+    carWash,
+    setCarWash,
   };
   return <userContext.Provider value={info}>{children}</userContext.Provider>;
 };

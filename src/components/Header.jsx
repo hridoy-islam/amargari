@@ -179,7 +179,7 @@ function NavList() {
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Contact Us
+          <Link to="/carwash">Car Wash</Link>
         </ListItem>
       </Typography>
     </List>

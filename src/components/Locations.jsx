@@ -1,3 +1,5 @@
+import { Card } from "@material-tailwind/react";
+
 const divisions = [
   {
     id: "1",
@@ -61,20 +63,15 @@ export const Location = () => {
   return (
     <>
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <h2 className="text-2xl font-bold my-6">Search by Location</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 items-center gap-6 md:gap-10">
           {divisions.map((item, index) => (
-            <div
+            <Card
               key={index}
-              className="size-full bg-white shadow-lg rounded-lg p-5 dark:bg-slate-900"
+              className="text-center p-4 shadow-sm border border-gray-200"
             >
-              <div className="flex items-center gap-x-4 mb-3">
-                <div className="flex-shrink-0">
-                  <h3 className="block text-lg  font-semibold text-gray-800 dark:text-white">
-                    {item.name}
-                  </h3>
-                </div>
-              </div>
-            </div>
+              <h3>{item.name}</h3>
+            </Card>
           ))}
         </div>
       </div>
