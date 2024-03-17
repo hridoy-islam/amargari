@@ -5,20 +5,14 @@ import { createContext, useState } from "react";
 export const userContext = createContext();
 
 const MainContext = ({ children }) => {
-  const [dialog, setDialog] = useState(false);
-  const [leaveCV, setLeaveCV] = useState(false);
-  const [job, setJob] = useState(false);
-  const [article, setArticle] = useState(false);
+  const [signIn, setSignIn] = useState(false);
+  const [signUp, setSignUp] = useState(false);
 
   const info = {
-    dialog,
-    setDialog,
-    leaveCV,
-    setLeaveCV,
-    job,
-    setJob,
-    article,
-    setArticle,
+    signIn,
+    setSignIn,
+    signUp,
+    setSignUp,
   };
   return <userContext.Provider value={info}>{children}</userContext.Provider>;
 };

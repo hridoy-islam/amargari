@@ -14,6 +14,7 @@ import { Signup } from "../pages/Signup";
 import { Profile } from "../pages/Profile";
 import { Service } from "../pages/Service";
 import { Posts } from "../pages/Posts";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/consultancy",
-        element: < Consultancy />,
+        element: <Consultancy />,
       },
       {
         path: "/contact",
@@ -45,10 +46,6 @@ const router = createBrowserRouter([
         element: <Single />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
         path: "/signin",
         element: <Signin />,
       },
@@ -56,17 +53,26 @@ const router = createBrowserRouter([
         path: "/Signup",
         element: <Signup />,
       },
-
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
       {
-        path: "/profile",
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/dashboard/profile",
         element: <Profile />,
       },
       {
-        path: "/Service",
+        path: "/dashboard/service",
         element: <Service />,
       },
       {
-        path: "/Posts",
+        path: "dashboard/Posts",
         element: <Posts />,
       },
     ],

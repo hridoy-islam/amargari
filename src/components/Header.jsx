@@ -1,11 +1,190 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Navbar,
-  MobileNav,
+  Collapse,
   Typography,
+  Button,
   IconButton,
+  List,
+  ListItem,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
+import {
+  ChevronDownIcon,
+  Bars3Icon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
+import {
+  Bars4Icon,
+  GlobeAmericasIcon,
+  NewspaperIcon,
+  PhoneIcon,
+  RectangleGroupIcon,
+  SquaresPlusIcon,
+  SunIcon,
+  TagIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/solid";
+import { userContext } from "../contexts/MainContext";
 import { Link } from "react-router-dom";
+
+const navListMenuItems = [
+  {
+    title: "Products",
+    description: "Find the perfect solution for your needs.",
+    icon: SquaresPlusIcon,
+  },
+  {
+    title: "About Us",
+    description: "Meet and learn about our dedication",
+    icon: UserGroupIcon,
+  },
+  {
+    title: "Blog",
+    description: "Find the perfect solution for your needs.",
+    icon: Bars4Icon,
+  },
+  {
+    title: "Services",
+    description: "Learn how we can help you achieve your goals.",
+    icon: SunIcon,
+  },
+  {
+    title: "Support",
+    description: "Reach out to us for assistance or inquiries",
+    icon: GlobeAmericasIcon,
+  },
+  {
+    title: "Contact",
+    description: "Find the perfect solution for your needs.",
+    icon: PhoneIcon,
+  },
+  {
+    title: "News",
+    description: "Read insightful articles, tips, and expert opinions.",
+    icon: NewspaperIcon,
+  },
+  {
+    title: "Products",
+    description: "Find the perfect solution for your needs.",
+    icon: RectangleGroupIcon,
+  },
+  {
+    title: "Special Offers",
+    description: "Explore limited-time deals and bundles",
+    icon: TagIcon,
+  },
+];
+
+function NavListMenu() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const renderItems = navListMenuItems.map(
+    ({ icon, title, description }, key) => (
+      <a href="#" key={key}>
+        <MenuItem className="flex items-center gap-3 rounded-lg">
+          <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
+            {" "}
+            {React.createElement(icon, {
+              strokeWidth: 2,
+              className: "h-6 text-gray-900 w-6",
+            })}
+          </div>
+          <div>
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="flex items-center text-sm font-bold"
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant="paragraph"
+              className="text-xs !font-medium text-blue-gray-500"
+            >
+              {description}
+            </Typography>
+          </div>
+        </MenuItem>
+      </a>
+    )
+  );
+
+  return (
+    <React.Fragment>
+      <Menu
+        open={isMenuOpen}
+        handler={setIsMenuOpen}
+        offset={{ mainAxis: 20 }}
+        placement="bottom"
+        allowHover={true}
+      >
+        <MenuHandler>
+          <Typography as="div" variant="small" className="font-medium">
+            <ListItem
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              selected={isMenuOpen || isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
+            >
+              Resources
+              <ChevronDownIcon
+                strokeWidth={2.5}
+                className={`hidden h-3 w-3 transition-transform lg:block ${
+                  isMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+              <ChevronDownIcon
+                strokeWidth={2.5}
+                className={`block h-3 w-3 transition-transform lg:hidden ${
+                  isMobileMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+            </ListItem>
+          </Typography>
+        </MenuHandler>
+        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
+          <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">
+            {renderItems}
+          </ul>
+        </MenuList>
+      </Menu>
+      <div className="block lg:hidden">
+        <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
+      </div>
+    </React.Fragment>
+  );
+}
+
+function NavList() {
+  return (
+    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">Home</ListItem>
+      </Typography>
+      <NavListMenu />
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Contact Us
+        </ListItem>
+      </Typography>
+    </List>
+  );
+}
 
 export function Header() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -17,315 +196,65 @@ export function Header() {
     );
   }, []);
 
-  const navItems = [
-    { text: "Space Jobs", href: "/space-jobs" },
-    { text: "Articles", href: "/articles" },
-    { text: "Investors Hub", href: "/investors-hub" },
-    { text: "Services", href: "/services" },
-    { text: "Our Projects", href: "/projects" },
-    { text: "Contact us", href: "/contact" },
-  ];
+  const { setSignIn, setSignUp } = useContext(userContext);
 
-  const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {navItems.map((item, index) => (
-        <Typography
-          key={index}
-          as="li"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-normal"
-        >
-          <Link
-            to={item.href}
-            className="flex items-center text-white"
-            activeClassName="text-red"
-          >
-            {item.text}
-          </Link>
-        </Typography>
-      ))}
-    </ul>
-  );
+  const handleSignIn = () => setSignIn((cur) => !cur);
+  const handleSignUp = () => setSignUp((cur) => !cur);
 
   return (
-    <div>
-      <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700">
-        <nav
-          className="relative max-w-[85rem] flex flex-wrap basis-full items-center w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
-          aria-label="Global"
+    <Navbar className="mx-auto px-4 py-2 shadow-sm">
+      <div className="flex items-center justify-between text-blue-gray-900">
+        <Typography
+          as="a"
+          href="#"
+          variant="h6"
+          className="mr-4 cursor-pointer py-1.5 lg:ml-2"
         >
-          <div className="flex items-center justify-between">
-            <Link
-            top="/"
-              className="flex-none text-xl font-semibold dark:text-white"
-             
-              aria-label="Brand"
-            >
-              Brand
-            </Link>
-          </div>
-
-          <div className="flex items-center ms-auto sm:ms-0 sm:order-3">
-            <div className="sm:hidden">
-              <button
-                type="button"
-                className="p-2 inline-flex justify-center items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                data-hs-overlay="#navbar-offcanvas-example"
-                aria-controls="navbar-offcanvas-example"
-                aria-label="Toggle navigation"
-              >
-                Menu
-                <svg
-                  className="hs-overlay-open:hidden size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="1" />
-                  <circle cx="12" cy="5" r="1" />
-                  <circle cx="12" cy="19" r="1" />
-                </svg>
-              </button>
-            </div>
-
-            <div className="ps-3 sm:ps-6 sm:ms-6 sm:border-s sm:border-gray-300 dark:border-gray-700">
-              <button
-                type="button"
-                className="size-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                data-hs-overlay="#navbar-secondary-content"
-                aria-controls="navbar-secondary-content"
-                aria-label="Toggle navigation"
-              >
-                <svg
-                  className="hs-collapse-open:hidden flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <line x1="3" x2="21" y1="6" y2="6" />
-                  <line x1="3" x2="21" y1="12" y2="12" />
-                  <line x1="3" x2="21" y1="18" y2="18" />
-                </svg>
-                <svg
-                  className="hs-collapse-open:block hidden flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
-          <div
-            id="navbar-offcanvas-example"
-            className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full fixed top-0 start-0 transition-all duration-300 transform h-full max-w-xs w-full z-[60] bg-white border-e basis-full grow sm:order-2 sm:static sm:block sm:h-auto sm:max-w-none sm:w-auto sm:border-r-transparent sm:transition-none sm:translate-x-0 sm:z-40 sm:basis-auto dark:bg-gray-800 dark:border-r-gray-700 sm:dark:border-r-transparent hidden"
-            tabindex="-1"
-            data-hs-overlay-close-on-resize
-          >
-            <div className="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:ps-7">
-              <Link
-                to={"/carwash"}
-                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
-                aria-current="page"
-              >
-                Car Wash
-              </Link>
-
-              <Link
-                to={"/consultancy"}
-                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
-                aria-current="/consultancy"
-              >
-             Car Buying Consultancy
-              </Link>
-              <Link
-                to={"/contact"}
-                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
-                aria-current="page"
-              >
-                Contact
-              </Link>
-              <Link
-                to={"/search"}
-                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
-                aria-current="page"
-              >
-               Search
-              </Link>
-              <Link
-                to={"/dashboard"}
-                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
-                aria-current="page"
-              >
-               Dashboard
-              </Link>
-              <Link
-                to={"/signin"}
-                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
-                aria-current="page"
-              >
-               Sign In
-              </Link>
-              <Link
-                to={"/signup"}
-                className="font-medium text-blue-600 px-6 sm:py-6 sm:px-0 dark:text-blue-500"
-                aria-current="page"
-              >
-               Sign Up
-              </Link>
-              <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
-                <button
-                  type="button"
-                  className="flex items-center w-full text-gray-500 hover:text-gray-400 font-medium px-6 sm:px-0 dark:text-gray-400 dark:hover:text-gray-500"
-                >
-                  Dropdown
-                  <svg
-                    className="flex-shrink-0 ms-2 size-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m6 9 6 6 6-6" />
-                  </svg>
-                </button>
-
-                <div className="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-48 hidden z-10 bg-white sm:shadow-md rounded-lg py-2 px-3 sm:px-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full sm:border before:-top-5 before:start-0 before:w-full before:h-5">
-                  <a
-                    className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                    href="#"
-                  >
-                    About
-                  </a>
-                  <div className="hs-dropdown relative [--strategy:static] sm:[--strategy:absolute] [--adaptive:none] sm:[--trigger:hover]">
-                    <button
-                      type="button"
-                      className="w-full flex justify-between items-center text-sm text-gray-800 rounded-lg py-2 px-3 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                    >
-                      Sub Menu
-                      <svg
-                        className="sm:-rotate-90 flex-shrink-0 ms-2 size-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="m6 9 6 6 6-6" />
-                      </svg>
-                    </button>
-
-                    <div className="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-48 hidden z-10 sm:mt-2 bg-white sm:shadow-md rounded-lg p-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute sm:border before:-end-5 before:top-0 before:h-full before:w-5 top-0 end-full !mx-[10px]">
-                      <a
-                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#"
-                      >
-                        About
-                      </a>
-                      <a
-                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#"
-                      >
-                        Downloads
-                      </a>
-                      <a
-                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#"
-                      >
-                        Team Account
-                      </a>
-                    </div>
-                  </div>
-
-                  <a
-                    className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                    href="#"
-                  >
-                    Downloads
-                  </a>
-                  <a
-                    className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                    href="#"
-                  >
-                    Team Account
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
-
-      <div
-        id="navbar-secondary-content"
-        className="hs-overlay hs-overlay-open:translate-x-0 hidden -translate-x-full fixed top-0 start-0 transition-all duration-300 transform h-full max-w-xs w-full z-[60] bg-white border-e dark:bg-gray-800 dark:border-gray-700"
-        tabindex="-1"
-      >
-        <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
-          <h3 className="font-bold text-gray-800 dark:text-white">
-            Offcanvas title
-          </h3>
-          <button
-            type="button"
-            className="inline-flex flex-shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white text-sm dark:text-gray-500 dark:hover:text-gray-400 dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
-            data-hs-overlay="#navbar-secondary-content"
-          >
-            <span className="sr-only">Close offcanvas</span>
-            <svg
-              className="flex-shrink-0 size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
-          </button>
+          <Link to="/">Amar Gari</Link>
+        </Typography>
+        <div className="hidden lg:block">
+          <NavList />
         </div>
-        <div className="p-4">
-          <p className="text-gray-800 dark:text-gray-400">
-            Some text as placeholder. In real life you can have the elements you
-            have chosen. Like, text, images, lists, etc.
-          </p>
+        <div className="hidden gap-2 lg:flex">
+          <Button
+            variant="text"
+            size="sm"
+            color="blue-gray"
+            onClick={handleSignIn}
+          >
+            Log In
+          </Button>
+          <Button variant="gradient" size="sm" onClick={handleSignUp}>
+            Sign Up
+          </Button>
+          <Button variant="gradient" size="sm">
+            <Link to={"/dashboard"}>Dashboard</Link>
+          </Button>
         </div>
+        <IconButton
+          variant="text"
+          color="blue-gray"
+          className="lg:hidden"
+          onClick={() => setOpenNav(!openNav)}
+        >
+          {openNav ? (
+            <XMarkIcon className="h-6 w-6" strokeWidth={2} />
+          ) : (
+            <Bars3Icon className="h-6 w-6" strokeWidth={2} />
+          )}
+        </IconButton>
       </div>
-    </div>
+      <Collapse open={openNav}>
+        <NavList />
+        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
+          <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
+            Log In
+          </Button>
+          <Button variant="gradient" size="sm" fullWidth>
+            Sign In
+          </Button>
+        </div>
+      </Collapse>
+    </Navbar>
   );
 }
