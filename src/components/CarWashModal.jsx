@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import {
   Button,
   Dialog,
   Card,
   CardBody,
-  CardFooter,
   Typography,
   Input,
-  Checkbox,
   Select,
   Option,
 } from "@material-tailwind/react";
@@ -43,8 +41,8 @@ export function CarWashModal() {
             </Select>
 
             <Input label="Address" size="lg" />
-            <Input type="date" label="Time" size="lg" />
-
+            <Input type="date" label="Date" size="lg" />
+            <Input type="time" min="09:00" max="18:00" label="Time" size="lg" />
             <Button>Confirm</Button>
           </CardBody>
         </Card>
