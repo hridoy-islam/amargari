@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { SignIn } from "../components/SignIn";
 import { SignUp } from "../components/SignUp";
-
+import { Toaster } from "react-hot-toast";
 const Main = () => {
   return (
     <div className="font-cabin font-normal">
@@ -12,6 +12,7 @@ const Main = () => {
       <Footer></Footer>
       <SignIn />
       <SignUp />
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };

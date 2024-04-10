@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
-import { login } from "./../features/Auth/authActions";
 import { useForm } from "react-hook-form";
+import { loginUser } from "../store/user/UserSlice";
 export const Signin = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
 
   const dispatch = useDispatch();
   const handleLogin = () => {
-    dispatch(login({ username: "admin", password: "admin" }));
+    dispatch(loginUser({ username: "admin", password: "admin" }));
   };
 
   return (

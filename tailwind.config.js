@@ -13,6 +13,12 @@ module.exports = withMT({
         cabin: ["Cabin", "sans-serif"],
       },
     },
+    colors: {
+      transparent: "transparent",
+      white: "#ffffff",
+      primary: "#EA2027",
+      secondary: "#1B1464",
+    },
   },
   plugins: [require("tailwind-scrollbar"), require("preline/plugin")],
 });

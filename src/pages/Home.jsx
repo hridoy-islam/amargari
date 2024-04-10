@@ -1,6 +1,6 @@
 import { Brands } from "../components/Brands";
 import { Featured } from "../components/Featured";
-import { Location } from "../components/Locations";
+import { OurServices } from "../components/OurServices";
 import { Slider } from "../components/Slider";
 
 /* eslint-disable no-undef */
@@ -8,7 +8,7 @@ export const Home = () => {
   return (
     <>
       <Slider />
-      <Location />
+      <OurServices />
       <Brands />
       <Featured />
     </>

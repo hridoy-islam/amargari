@@ -30,7 +30,7 @@ const TABLE_ROWS = [
   },
 ];
 
-export function Service() {
+export function Listings() {
   return (
     <Card className="h-full w-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">

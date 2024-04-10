@@ -1,4 +1,5 @@
 import { Carousel } from "@material-tailwind/react";
+import banner1 from "../assets/banner1.png";
 
 export function Slider() {
   return (
@@ -20,21 +21,7 @@ export function Slider() {
         </div>
       )}
     >
-      <img
-        src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf"
-        alt="image 1"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1625773049545-fb23fc4f4538"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1469285994282-454ceb49e63c"
-        alt="image 3"
-        className="h-full w-full object-cover"
-      />
+      <img src={banner1} alt="image 1" className="h-96 w-full object-cover" />
     </Carousel>
   );
 }

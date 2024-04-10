@@ -51,18 +51,6 @@ export function SignIn() {
             <Button variant="gradient" fullWidth>
               Sign In
             </Button>
-            <Typography variant="small" className="mt-4 flex justify-center">
-              Don&apos;t have an account?
-              <Typography
-                as="a"
-                href="#signup"
-                variant="small"
-                color="blue-gray"
-                className="ml-1 font-bold"
-              >
-                Sign up
-              </Typography>
-            </Typography>
           </CardFooter>
         </Card>
       </Dialog>

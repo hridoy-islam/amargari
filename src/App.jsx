@@ -1,7 +1,7 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./router/router";
 import MainContext from "./contexts/MainContext";
-import store from "./features/store";
+import store from "./store";
 import { Provider } from "react-redux";
 function App() {
   return (

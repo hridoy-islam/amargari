@@ -18,7 +18,7 @@ export function SignUp() {
   return (
     <>
       <Dialog
-        size="xs"
+        size="md"
         open={signUp}
         handler={handleSignUp}
         className="bg-transparent shadow-none"
@@ -28,13 +28,15 @@ export function SignUp() {
             <Typography variant="h4" color="blue-gray">
               Sign Up
             </Typography>
-            <Typography
-              className="mb-3 font-normal"
-              variant="paragraph"
-              color="gray"
-            >
-              Enter your Mobile and password to Sign In.
+
+            <Typography className="-mb-2" variant="h6">
+              Your Name
             </Typography>
+            <Input label="Name" size="lg" />
+            <Typography className="-mb-2" variant="h6">
+              Your Email
+            </Typography>
+            <Input label="Email" size="lg" />
             <Typography className="-mb-2" variant="h6">
               Your Phone
             </Typography>
@@ -49,20 +51,8 @@ export function SignUp() {
           </CardBody>
           <CardFooter className="pt-0">
             <Button variant="gradient" fullWidth>
-              Sign In
+              Sign Up
             </Button>
-            <Typography variant="small" className="mt-4 flex justify-center">
-              Don&apos;t have an account?
-              <Typography
-                as="a"
-                href="#signup"
-                variant="small"
-                color="blue-gray"
-                className="ml-1 font-bold"
-              >
-                Sign up
-              </Typography>
-            </Typography>
           </CardFooter>
         </Card>
       </Dialog>
