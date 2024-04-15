@@ -10,7 +10,10 @@ export const CarWash = () => {
   const handleCarWash = () => setCarWash((cur) => !cur);
   return (
     <>
-      <ServiceTitle />
+      <ServiceTitle
+        title="Car Interior Deep Cleaning"
+        description="Best Service at an Affordable Price"
+      />
       <div className="container mx-auto">
         <div className="py-10 text-center space-y-4">
           <h2>Service Details</h2>

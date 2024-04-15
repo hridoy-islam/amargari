@@ -23,6 +23,7 @@ import { LocationPage } from "../pages/LocationPage";
 import { Privacy } from "../pages/Privacy";
 import { Terms } from "../pages/Terms";
 import DashboardGuard from "../components/Admin/DashboardGuard";
+import { About } from "../pages/About";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       {
         path: "/login",

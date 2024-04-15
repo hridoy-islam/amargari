@@ -17,72 +17,38 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {
-  Bars4Icon,
-  GlobeAmericasIcon,
-  NewspaperIcon,
-  PhoneIcon,
-  RectangleGroupIcon,
-  SquaresPlusIcon,
-  SunIcon,
-  TagIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/solid";
+
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useSelector } from "react-redux";
 
-const navListMenuItems = [
-  {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: SquaresPlusIcon,
-  },
-  {
-    title: "About Us",
-    description: "Meet and learn about our dedication",
-    icon: UserGroupIcon,
-  },
-  {
-    title: "Blog",
-    description: "Find the perfect solution for your needs.",
-    icon: Bars4Icon,
-  },
-  {
-    title: "Services",
-    description: "Learn how we can help you achieve your goals.",
-    icon: SunIcon,
-  },
-  {
-    title: "Support",
-    description: "Reach out to us for assistance or inquiries",
-    icon: GlobeAmericasIcon,
-  },
-  {
-    title: "Contact",
-    description: "Find the perfect solution for your needs.",
-    icon: PhoneIcon,
-  },
-  {
-    title: "News",
-    description: "Read insightful articles, tips, and expert opinions.",
-    icon: NewspaperIcon,
-  },
-  {
-    title: "Products",
-    description: "Find the perfect solution for your needs.",
-    icon: RectangleGroupIcon,
-  },
-  {
-    title: "Special Offers",
-    description: "Explore limited-time deals and bundles",
-    icon: TagIcon,
-  },
-];
-
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 items-end">
+      <Typography
+        as="a"
+        href="/"
+        variant="h6"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
+          Home
+        </ListItem>
+      </Typography>
+
+      {/* <Typography
+        as="a"
+        href="/"
+        variant="h6"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
+          Brands
+        </ListItem>
+      </Typography> */}
+
       <Typography
         as="a"
         href="#"
@@ -90,8 +56,8 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4 text-primary font-semibold">
-          Home
+        <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
+          <Link to="/carwash">Car Wash</Link>
         </ListItem>
       </Typography>
 
@@ -102,8 +68,8 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4 text-primary font-semibold">
-          <Link to="/carwash">Car Wash</Link>
+        <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
+          <Link to="/contact">Contact</Link>
         </ListItem>
       </Typography>
     </List>
