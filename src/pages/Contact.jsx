@@ -1,3 +1,4 @@
+import { GetInTouch } from "../components/GetInTouch";
 import { ServiceTitle } from "../components/ServiceTitle";
 
 export const Contact = () => {
@@ -7,6 +8,7 @@ export const Contact = () => {
         title="Contact"
         description="We Would love to hear from you"
       />
+      <GetInTouch />
     </>
   );
 };

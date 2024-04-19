@@ -1,4 +1,7 @@
 import { ServiceTitle } from "../components/ServiceTitle";
+import {
+  Card
+} from "@material-tailwind/react";
 
 export const About = () => {
   return (
@@ -37,6 +40,31 @@ export const About = () => {
           customer-centric professionals dedicated to delivering excellence in
           everything we do.
         </p>
+        <div className="my-6">
+          <h2 className="text-center">Why Us?</h2>
+          <div className="grid grid-cols-4 gap-4">
+            <Card className="p-4">
+              <h4>Selection Car</h4>
+              <p>You can choose from a wide selection of vehicles. Find the perfect car that fits your lifestyle and budget, from the newest models to pre-owned gems</p>
+            </Card>
+            <Card className="p-4">
+              <h4>Service</h4>
+              <p>Enjoy the convenience of professional car maintenance at home. With our skilled technicians, you won't have to leave your home for top-notch service.</p>
+            </Card>
+            <Card className="p-4">
+              <h4>Satisfaction</h4>
+              <p>The transactions we conduct are transparent and reliable, leaving no room for guesswork. We measure our success by your satisfaction.</p>
+            </Card>
+            <Card className="p-4">
+              <h4>Solutions</h4>
+              <p>Personalized automotive solutions tailored to your needs. Garirmela.com understands that every driver is unique, and so are their needs.</p>
+            </Card>
+          </div>
+        </div>
+ 
+
+        <h2>Drive into the Future with Garirmela.com</h2>
+        <p>Are you ready to take the next step in your automotive journey? We make the road to your next car as smooth as the ride at Garirmela.com. We are reinventing the automotive experience - one car, one service, one satisfied customer at a time.</p>
       </div>
     </div>
   );
