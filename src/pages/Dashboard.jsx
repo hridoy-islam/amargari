@@ -3,9 +3,7 @@ export const Dashboard = () => {
   const { user } = useSelector((state) => state.user);
   return (
     <>
-      <div>
-        Dashboard Page {user.name} - {user.email}
-      </div>
+      <div>Welcome {user.name}</div>
     </>
   );
 };

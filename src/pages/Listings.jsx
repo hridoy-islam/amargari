@@ -1,60 +1,89 @@
 import { Card, Typography } from "@material-tailwind/react";
-
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 const TABLE_HEAD = ["Name", "Job", "Employed", ""];
 
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-];
+import axiosInstance from "../axios";
 
 export function Listings() {
+  const { user } = useSelector((state) => state.user);
+  const [listing, setListing] = useState(null);
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get("/cars?");
+      setListing(response.data.data.result);
+      console.log(listing);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, [user]);
   return (
     <Card className="h-full w-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
-            {TABLE_HEAD.map((head) => (
-              <th
-                key={head}
-                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
               >
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-normal leading-none opacity-70"
-                >
-                  {head}
-                </Typography>
-              </th>
-            ))}
+                Title
+              </Typography>
+            </th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                Brand
+              </Typography>
+            </th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                Color
+              </Typography>
+            </th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                Model
+              </Typography>
+            </th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                Status
+              </Typography>
+            </th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                View
+              </Typography>
+            </th>
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ name, job, date }, index) => {
-            const isLast = index === TABLE_ROWS.length - 1;
+          {listing?.map(({ title, brand, color, model, status }, index) => {
+            const isLast = index === listing.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
             return (
@@ -65,7 +94,7 @@ export function Listings() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {name}
+                    {title}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -74,7 +103,7 @@ export function Listings() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {job}
+                    {brand}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -83,18 +112,34 @@ export function Listings() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {date}
+                    {color}
                   </Typography>
                 </td>
                 <td className={classes}>
                   <Typography
-                    as="a"
-                    href="#"
                     variant="small"
                     color="blue-gray"
-                    className="font-medium"
+                    className="font-normal"
                   >
-                    Edit
+                    {model}
+                  </Typography>
+                </td>
+                <td className={classes}>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {status}
+                  </Typography>
+                </td>
+                <td className={classes}>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    View
                   </Typography>
                 </td>
               </tr>

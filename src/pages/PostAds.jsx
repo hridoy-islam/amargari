@@ -4,6 +4,8 @@ import { useDropzone } from "react-dropzone";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import ReactSelect from "react-select";
 import makeAnimated from "react-select/animated";
+import { useForm, Controller } from "react-hook-form";
+import axiosInstance from "../axios";
 
 import divisions from "../assets/divisions.json";
 import districtsData from "../assets/districts.json";
@@ -82,172 +84,256 @@ export const PostAds = () => {
     setUpazilas(filteredUpazilas);
   };
 
+  const { handleSubmit, control, register } = useForm(); // Initialize the form
+
+  const onSubmit = async (data) => {
+    // try {
+    //   const response = await axiosInstance.post("/cars", data);
+    //   console.log(response.data.data);
+    //   if (!response.ok) {
+    //     throw new Error("Failed to submit data");
+    //   }
+    //   console.log("Data submitted successfully");
+    // } catch (error) {
+    //   console.error("Error submitting data:", error.message);
+    // }
+    console.log(data);
+  };
+
   return (
     <div className="space-y-3 pb-6">
-      <p>Please Upload Car Pictures</p>
-      <div className="container">
-        <div {...getRootProps({ className: "dropzone" })}>
-          <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files (max 4)</p>
-          {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+        <p>Please Upload Car Pictures</p>
+        <div className="container">
+          <div {...getRootProps({ className: "dropzone" })}>
+            <input {...getInputProps()} />
+            <p>
+              Drag 'n' drop some files here, or click to select files (max 4)
+            </p>
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+          </div>
+          <Controller
+            name="images"
+            control={control}
+            defaultValue={[]}
+            render={({ field }) => (
+              <div>
+                {field.value.map((file, index) => (
+                  <div key={index}>
+                    <p>{file.name}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          />
+          <div className="image-grid">
+            {images.map((file, index) => (
+              <div key={index} className="image-item">
+                <img
+                  src={URL.createObjectURL(file)}
+                  alt={`Image ${index}`}
+                  style={{
+                    width: "100px",
+                    height: "auto",
+                    marginRight: "10px",
+                  }}
+                />
+                <button
+                  onClick={() => removeImage(index)}
+                  className="remove-button"
+                >
+                  <AiOutlineCloseCircle />
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="image-grid">
-          {images.map((file, index) => (
-            <div key={index} className="image-item">
-              <img
-                src={URL.createObjectURL(file)}
-                alt={`Image ${index}`}
-                style={{
-                  width: "100px",
-                  height: "auto",
-                  marginRight: "10px",
-                }}
-              />
-              <button
-                onClick={() => removeImage(index)}
-                className="remove-button"
-              >
-                <AiOutlineCloseCircle />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <Input type="text" label="Title" />
-      <Input type="text" label="Brand" />
-      <Input type="text" label="Model" />
-      <Input type="text" label="Registration Year" />
-      <Input type="text" label="Production Year" />
-
-      <ReactSelect
-        options={condition}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            borderColor: state.isFocused ? "black" : "grey",
-          }),
-        }}
-        theme={(theme) => ({
-          ...theme,
-          borderRadius: 5,
-          colors: {
-            ...theme.colors,
-            primary: "black",
-          },
-          fontSize: "14px",
-        })}
-        placeholder="Car Condition"
-      />
-
-      <ReactSelect
-        options={transmition}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            borderColor: state.isFocused ? "black" : "grey",
-          }),
-        }}
-        theme={(theme) => ({
-          ...theme,
-          borderRadius: 5,
-          colors: {
-            ...theme.colors,
-            primary: "black",
-          },
-          fontSize: "14px",
-        })}
-        placeholder="Transmition Type"
-      />
-      <ReactSelect
-        isMulti
-        options={fuelType}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            borderColor: state.isFocused ? "black" : "grey",
-          }),
-        }}
-        theme={(theme) => ({
-          ...theme,
-          borderRadius: 5,
-          colors: {
-            ...theme.colors,
-            primary: "black",
-          },
-        })}
-        components={animatedComponents}
-        placeholder="Fuel Type"
-      />
-      <Input label="Engine Capacity"></Input>
-
-      <Input label="Kilometer"></Input>
-
-      <Input label="Price"></Input>
-      <Input label="Phone"></Input>
-      <ReactSelect
-        options={divisions}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            borderColor: state.isFocused ? "black" : "grey",
-          }),
-        }}
-        theme={(theme) => ({
-          ...theme,
-          borderRadius: 5,
-          colors: {
-            ...theme.colors,
-            primary: "black",
-          },
-        })}
-        placeholder="Divison"
-        onChange={handleDivisionChange}
-        value={selectedDivision}
-      />
-      <ReactSelect
-        options={districts}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            borderColor: state.isFocused ? "black" : "grey",
-          }),
-        }}
-        theme={(theme) => ({
-          ...theme,
-          borderRadius: 5,
-          colors: {
-            ...theme.colors,
-            primary: "black",
-          },
-        })}
-        placeholder="District"
-        onChange={handleDistrictChange}
-      />
-      <ReactSelect
-        options={upazilas}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            borderColor: state.isFocused ? "black" : "grey",
-          }),
-        }}
-        theme={(theme) => ({
-          ...theme,
-          borderRadius: 5,
-          colors: {
-            ...theme.colors,
-            primary: "black",
-          },
-        })}
-        placeholder="Upazila"
-      />
-
-      <input
-        type="submit"
-        value="Submit Car"
-        className="bg-primary w-full text-white py-2 rounded-lg font-semibold cursor-pointer"
-      />
+        <Input type="text" label="Title" {...register("title")} />
+        <Input type="text" label="Brand" {...register("brand")} />
+        <Input type="text" label="Model" {...register("model")} />
+        <Input
+          type="text"
+          label="Registration Year"
+          {...register("registration_year")}
+        />
+        <Input
+          type="text"
+          label="Production Year"
+          {...register("production_year")}
+        />
+        <Controller
+          name="condition"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactSelect
+              {...field}
+              options={condition}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? "black" : "grey",
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary: "black",
+                },
+                fontSize: "14px",
+              })}
+              placeholder="Car Condition"
+            />
+          )}
+        />
+        <Controller
+          name="transmition"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactSelect
+              {...field}
+              options={transmition}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? "black" : "grey",
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary: "black",
+                },
+                fontSize: "14px",
+              })}
+              placeholder="Transmition Type"
+            />
+          )}
+        />
+        <Controller
+          name="fuelType"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactSelect
+              {...field}
+              isMulti
+              options={fuelType}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? "black" : "grey",
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary: "black",
+                },
+              })}
+              components={animatedComponents}
+              placeholder="Fuel Type"
+            />
+          )}
+        />
+        <Input label="Engine Capacity" {...register("engine_capacity")}></Input>
+        <Input label="Kilometer" {...register("kilometer")}></Input>
+        <Input label="Price" {...register("price")}></Input>
+        <Input label="Phone" {...register("phone")}></Input>
+        <Controller
+          name="division"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactSelect
+              {...field}
+              options={divisions}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? "black" : "grey",
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary: "black",
+                },
+              })}
+              placeholder="Divison"
+              onChange={handleDivisionChange}
+              value={selectedDivision}
+            />
+          )}
+        />
+        <Controller
+          name="district"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactSelect
+              {...field}
+              options={districts}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? "black" : "grey",
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary: "black",
+                },
+              })}
+              placeholder="District"
+              onChange={handleDistrictChange}
+            />
+          )}
+        />
+        <Controller
+          name="upazila"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactSelect
+              {...field}
+              options={upazilas}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? "black" : "grey",
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary: "black",
+                },
+              })}
+              placeholder="Upazila"
+            />
+          )}
+        />
+        <input
+          type="submit"
+          value="Submit Car"
+          className="bg-primary w-full text-white py-2 rounded-lg font-semibold cursor-pointer"
+        />
+      </form>
     </div>
   );
 };
