@@ -11,7 +11,7 @@ const CarWashBooking = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10 bg-gray-100 p-10">
+    <div className="container mx-auto mt-10 bg-gray-100  p-10">
       <h1 className="text-3xl text-center font-semibold mb-4">
         Book a Car Wash
       </h1>

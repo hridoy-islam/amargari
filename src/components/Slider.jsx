@@ -1,5 +1,6 @@
 import { Carousel } from "@material-tailwind/react";
 import banner1 from "../assets/banner1.png";
+import banner2 from "../assets/banner2.jpeg";
 
 export function Slider() {
   return (
@@ -22,6 +23,7 @@ export function Slider() {
       )}
     >
       <img src={banner1} alt="image 1" className="h-96 w-full object-cover" />
+      <img src={banner2} alt="image 1" className="h-96 w-full object-cover" />
     </Carousel>
   );
 }

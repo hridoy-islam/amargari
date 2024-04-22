@@ -1,6 +1,7 @@
 import { ServiceTitle } from "../components/ServiceTitle";
 import { CarWashFaq } from "../components/CarWashFaq";
 import CarWashBooking from "../components/CarWashBooking";
+import { Testimonial } from "../components/Testimonial";
 
 export const CarWash = () => {
   return (
@@ -42,7 +43,7 @@ export const CarWash = () => {
             />
           </div>
         </div>
-
+        <Testimonial />
         <CarWashBooking />
         <CarWashFaq />
       </div>
