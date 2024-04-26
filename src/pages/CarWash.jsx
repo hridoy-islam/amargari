@@ -2,8 +2,11 @@ import { ServiceTitle } from "../components/ServiceTitle";
 import { CarWashFaq } from "../components/CarWashFaq";
 import CarWashBooking from "../components/CarWashBooking";
 import { Testimonial } from "../components/Testimonial";
+import { useSelector } from "react-redux";
+import { LoginCTA } from "../components/LoginCTA";
 
 export const CarWash = () => {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   return (
     <>
       <ServiceTitle
@@ -44,7 +47,8 @@ export const CarWash = () => {
           </div>
         </div>
         <Testimonial />
-        <CarWashBooking />
+        {!isAuthenticated ? <LoginCTA /> : <CarWashBooking />}
+
         <CarWashFaq />
       </div>
     </>

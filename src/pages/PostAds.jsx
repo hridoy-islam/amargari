@@ -1,49 +1,42 @@
-import { Button, Input, Textarea } from "@material-tailwind/react";
-import { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { Input } from "@material-tailwind/react";
+import { useState } from "react";
 import ReactSelect from "react-select";
 import makeAnimated from "react-select/animated";
 import { useForm, Controller } from "react-hook-form";
 import axiosInstance from "../axios";
-
 import divisions from "../assets/divisions.json";
 import districtsData from "../assets/districts.json";
 import upazilasData from "../assets/upazilas.json";
+import toast from "react-hot-toast";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const PostAds = () => {
-  const [images, setImages] = useState([]);
+  const navigate = useNavigate();
+  const [publicIds, setPublicIds] = useState([]);
 
-  const [errorMessage, setErrorMessage] = useState("");
+  // Replace with your own cloud name and upload preset
+  const cloudName = "dneodtbad";
+  const uploadPreset = "postcar";
 
-  const onDrop = useCallback(
-    (acceptedFiles) => {
-      // Ensure only the first 4 files are added
-      // const newImages = acceptedFiles.slice(0, 4 - images.length);
-      // // Update state with newly added images
-      // setImages((prevImages) => [...prevImages, ...newImages]);
-
-      if (images.length + acceptedFiles.length > 4) {
-        setErrorMessage("Exceeded maximum file limit (4 files)");
-      } else {
-        setImages((prevImages) => [...prevImages, ...acceptedFiles]);
-        setErrorMessage("");
-      }
-    },
-    [images]
-  );
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: { "image/*": [".jpeg", ".png", ".jpg"] },
-    maxFiles: 4,
-    onDrop,
-    multiple: true,
-  });
-
-  const removeImage = (indexToRemove) => {
-    setImages((prevImages) =>
-      prevImages.filter((_, index) => index !== indexToRemove)
-    );
+  const uwConfig = {
+    cloudName,
+    uploadPreset,
+    // You can add more configuration options here
   };
+
+  const handlePublicIdUpdate = (newPublicId) => {
+    setPublicIds((prevIds) => [...prevIds, newPublicId]);
+  };
+
+  const cld = new Cloudinary({
+    cloud: { cloudName },
+  });
 
   const condition = [
     { value: "used", label: "Used" },
@@ -60,8 +53,7 @@ export const PostAds = () => {
     { value: "dissel", label: "Dissel" },
     { value: "lpg", label: "LPG" },
   ];
-  const animatedComponents = makeAnimated();
-
+  const { user } = useSelector((state) => state.user);
   const [selectedDivision, setSelectedDivision] = useState(null);
   const [districts, setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
@@ -75,6 +67,7 @@ export const PostAds = () => {
     // Reset selected district and upazila when division changes
     setUpazilas([]);
   };
+  const animatedComponents = makeAnimated();
 
   const handleDistrictChange = (selectedOption) => {
     // Filter upazilas based on selected district
@@ -84,83 +77,153 @@ export const PostAds = () => {
     setUpazilas(filteredUpazilas);
   };
 
-  const { handleSubmit, control, register } = useForm(); // Initialize the form
+  const {
+    handleSubmit,
+    control,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm(); // Initialize the form
 
   const onSubmit = async (data) => {
-    // try {
-    //   const response = await axiosInstance.post("/cars", data);
-    //   console.log(response.data.data);
-    //   if (!response.ok) {
-    //     throw new Error("Failed to submit data");
-    //   }
-    //   console.log("Data submitted successfully");
-    // } catch (error) {
-    //   console.error("Error submitting data:", error.message);
-    // }
-    console.log(data);
+    try {
+      const division = data.division.value;
+      const district = data.district.value;
+      const upazila = data.upazila.value;
+      const brand = data.brand.value;
+      const condition = data.condition.value;
+      const transmition = data.transmition.value;
+      const userid = user?._id;
+      const gallery = publicIds;
+
+      const formData = {
+        ...data,
+        division,
+        district,
+        upazila,
+        brand,
+        condition,
+        transmition,
+        userid,
+        gallery,
+      };
+
+      const response = await axiosInstance.post("/cars", formData);
+
+      if (response.data.success) {
+        toast.success("Car Posted successfully");
+        reset();
+        navigate("/dashboard/listings");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
+  const car_brands = [
+    { value: "Toyota", label: "Toyota" },
+    { value: "Honda", label: "Honda" },
+    { value: "Nissan", label: "Nissan" },
+    { value: "Suzuki", label: "Suzuki" },
+    { value: "Mitsubishi", label: "Mitsubishi" },
+    { value: "Hyundai", label: "Hyundai" },
+    { value: "Kia", label: "Kia" },
+    { value: "Ford", label: "Ford" },
+    { value: "Chevrolet", label: "Chevrolet" },
+    { value: "Volkswagen", label: "Volkswagen" },
+    { value: "Mercedes-Benz", label: "Mercedes-Benz" },
+    { value: "BMW", label: "BMW" },
+    { value: "Audi", label: "Audi" },
+    { value: "Mazda", label: "Mazda" },
+    { value: "Lexus", label: "Lexus" },
+    { value: "Isuzu", label: "Isuzu" },
+    { value: "Proton", label: "Proton" },
+    { value: "Tata", label: "Tata" },
+    { value: "Mahindra", label: "Mahindra" },
+    { value: "Renault", label: "Renault" },
+  ];
 
   return (
     <div className="space-y-3 pb-6">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-        <p>Please Upload Car Pictures</p>
         <div className="container">
-          <div {...getRootProps({ className: "dropzone" })}>
-            <input {...getInputProps()} />
-            <p>
-              Drag 'n' drop some files here, or click to select files (max 4)
-            </p>
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-          </div>
-          <Controller
-            name="images"
-            control={control}
-            defaultValue={[]}
-            render={({ field }) => (
-              <div>
-                {field.value.map((file, index) => (
-                  <div key={index}>
-                    <p>{file.name}</p>
-                  </div>
-                ))}
-              </div>
-            )}
+          <CloudinaryUploadWidget
+            uwConfig={uwConfig}
+            setPublicId={handlePublicIdUpdate}
           />
           <div className="image-grid">
-            {images.map((file, index) => (
+            {publicIds.map((publicId, index) => (
               <div key={index} className="image-item">
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt={`Image ${index}`}
+                <AdvancedImage
                   style={{
-                    width: "100px",
-                    height: "auto",
-                    marginRight: "10px",
+                    maxWidth: "100%",
+                    float: "left",
+                    margin: "0 5px",
                   }}
+                  cldImg={cld.image(publicId)}
+                  plugins={[responsive(), placeholder()]}
                 />
-                <button
-                  onClick={() => removeImage(index)}
-                  className="remove-button"
-                >
-                  <AiOutlineCloseCircle />
-                </button>
               </div>
             ))}
           </div>
         </div>
-        <Input type="text" label="Title" {...register("title")} />
-        <Input type="text" label="Brand" {...register("brand")} />
-        <Input type="text" label="Model" {...register("model")} />
+        <Input
+          type="text"
+          label="Title"
+          {...register("title", { required: true })}
+        />
+        <Controller
+          name="brand"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactSelect
+              {...field}
+              options={car_brands}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? "black" : "grey",
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  primary: "black",
+                },
+                fontSize: "14px",
+              })}
+              placeholder="Car Brand"
+            />
+          )}
+        />
+        {errors.brand && <span>This field is required</span>}
+        <Input
+          type="text"
+          label="Model"
+          {...register("model", { required: true })}
+        />
+        {errors.model && <span>This field is required</span>}
+        <Input
+          type="text"
+          label="Color"
+          {...register("color", { required: true })}
+        />
+        {errors.color && <span>This field is required</span>}
         <Input
           type="text"
           label="Registration Year"
-          {...register("registration_year")}
+          {...register("registration_year", { required: true })}
         />
+        {errors.registration_year && <span>This field is required</span>}
         <Input
           type="text"
           label="Production Year"
-          {...register("production_year")}
+          {...register("production_year", { required: true })}
         />
+        {errors.production_year && <span>This field is required</span>}
         <Controller
           name="condition"
           control={control}
@@ -244,9 +307,14 @@ export const PostAds = () => {
           )}
         />
         <Input label="Engine Capacity" {...register("engine_capacity")}></Input>
+        {errors.engine_capacity && <span>This field is required</span>}
         <Input label="Kilometer" {...register("kilometer")}></Input>
+        {errors.kilometer && <span>This field is required</span>}
         <Input label="Price" {...register("price")}></Input>
+        {errors.price && <span>This field is required</span>}
         <Input label="Phone" {...register("phone")}></Input>
+        {errors.phone && <span>This field is required</span>}
+
         <Controller
           name="division"
           control={control}
@@ -269,9 +337,12 @@ export const PostAds = () => {
                   primary: "black",
                 },
               })}
-              placeholder="Divison"
-              onChange={handleDivisionChange}
-              value={selectedDivision}
+              placeholder="Division"
+              onChange={(selectedOption) => {
+                field.onChange(selectedOption);
+                handleDivisionChange(selectedOption);
+              }}
+              value={field.value}
             />
           )}
         />
@@ -298,7 +369,11 @@ export const PostAds = () => {
                 },
               })}
               placeholder="District"
-              onChange={handleDistrictChange}
+              onChange={(selectedOption) => {
+                field.onChange(selectedOption);
+                handleDistrictChange(selectedOption);
+              }}
+              value={field.value}
             />
           )}
         />
@@ -310,6 +385,7 @@ export const PostAds = () => {
             <ReactSelect
               {...field}
               options={upazilas}
+              placeholder="Upazila"
               styles={{
                 control: (baseStyles, state) => ({
                   ...baseStyles,
@@ -324,7 +400,22 @@ export const PostAds = () => {
                   primary: "black",
                 },
               })}
-              placeholder="Upazila"
+              onChange={(selectedOption) => {
+                field.onChange(selectedOption);
+              }}
+              value={field.value}
+            />
+          )}
+        />
+        <Controller
+          name="details"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <ReactQuill
+              theme="snow"
+              value={field.value}
+              onChange={field.onChange}
             />
           )}
         />

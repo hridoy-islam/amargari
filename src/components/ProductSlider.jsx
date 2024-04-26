@@ -4,25 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
-export function ProductSlider() {
-  const data = [
-    {
-      imgelink: "https://images.unsplash.com/photo-1596157783429-027a9773431a",
-    },
-    {
-      imgelink: "https://images.unsplash.com/photo-1596157785295-e10afbaac5e8",
-    },
-    {
-      imgelink: "https://images.unsplash.com/photo-1596157783297-79ab8da02f54",
-    },
-    {
-      imgelink: "https://images.unsplash.com/photo-1596157783315-26f9d83e08a8",
-    },
-    {
-      imgelink: "https://images.unsplash.com/photo-1607500421646-be05ba1e0341",
-    },
-  ];
-
+export function ProductSlider({ gallery }) {
   const sliderRef = useRef();
 
   const settings = {
@@ -44,10 +26,10 @@ export function ProductSlider() {
   return (
     <div className="relative">
       <Slider ref={sliderRef} {...settings}>
-        {data.map(({ imgelink }, index) => (
+        {gallery?.map((item, index) => (
           <div key={index}>
             <img
-              src={imgelink}
+              src={`https://res.cloudinary.com/dneodtbad/image/upload/${item}`}
               className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[500px]"
               alt="gallery-image"
             />
@@ -67,11 +49,11 @@ export function ProductSlider() {
         <FaChevronRight className="h-6 w-6" />
       </button>
       <div className="grid grid-cols-5 gap-4">
-        {data.map(({ imgelink }, index) => (
+        {gallery?.map((item, index) => (
           <div key={index}>
             <img
               onClick={() => sliderRef.current.slickGoTo(index)}
-              src={imgelink}
+              src={`https://res.cloudinary.com/dneodtbad/image/upload/${item}`}
               className="h-24 max-w-full cursor-pointer rounded-lg object-cover object-center"
               alt="gallery-image"
             />

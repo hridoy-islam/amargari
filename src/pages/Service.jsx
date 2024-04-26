@@ -1,36 +1,36 @@
-import { Card, Typography } from "@material-tailwind/react";
+import { Card, Chip, Typography } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import axiosInstance from "../axios";
+import moment from "moment";
 
-const TABLE_HEAD = ["Name", "Job", "Employed", ""];
-
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
+const TABLE_HEAD = [
+  "Name",
+  "Booking Date",
+  "Phone",
+  "Car",
+  "Address",
+  "Status",
 ];
 
 export function Service() {
+  const { user } = useSelector((state) => state.user);
+  const [booking, setBooking] = useState([]);
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get(`/booking?userid=${user._id}`);
+      if (response.data.success) {
+        setBooking(response.data.data.result);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [user]);
+
   return (
     <Card className="h-full w-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
@@ -53,53 +53,87 @@ export function Service() {
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ name, job, date }, index) => {
-            const isLast = index === TABLE_ROWS.length - 1;
-            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+          {booking.map(
+            ({ name, bookingDate, phone, car, address, status }, index) => {
+              const isLast = index === booking.length - 1;
+              const classes = isLast
+                ? "p-4"
+                : "p-4 border-b border-blue-gray-50";
 
-            return (
-              <tr key={name}>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {name}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {job}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {date}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    as="a"
-                    href="#"
-                    variant="small"
-                    color="blue-gray"
-                    className="font-medium"
-                  >
-                    Edit
-                  </Typography>
-                </td>
-              </tr>
-            );
-          })}
+              return (
+                <tr key={name}>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {name}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {moment(bookingDate).format("MMM Do YY")}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {phone}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {car}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {address}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    {status == "pending" && (
+                      <Chip
+                        color="amber"
+                        value={status}
+                        className="text-center"
+                      />
+                    )}
+                    {status == "approved" && (
+                      <Chip
+                        color="blue"
+                        value={status}
+                        className="text-center"
+                      />
+                    )}
+                    {status == "completed" && (
+                      <Chip
+                        color="green"
+                        value={status}
+                        className="text-center"
+                      />
+                    )}
+                  </td>
+                </tr>
+              );
+            }
+          )}
         </tbody>
       </table>
     </Card>

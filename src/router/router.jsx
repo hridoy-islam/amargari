@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         element: <Search />,
       },
       {
-        path: "/single",
+        path: "/car/:id",
         element: <Single />,
       },
       {
