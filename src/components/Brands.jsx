@@ -67,7 +67,7 @@ export const Brands = () => {
         {brands.map((item, index) => (
           <Link to={`/brand/${item.slug}`} key={index}>
             <Card className="text-center p-4 shadow-sm border border-gray-200">
-              <img src={item.img} alt="" />
+              <img src={item.img} alt="" className="w-20 h-auto mx-auto" />
               <h3>{item.name}</h3>
             </Card>
           </Link>

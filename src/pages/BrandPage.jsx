@@ -24,7 +24,9 @@ export const BrandPage = () => {
       {listing === null ? (
         <p className="text-xl font-bold text-center">Loading...</p>
       ) : listing.length < 1 ? (
-        <p className="text-xl font-bold text-center">No Car Listed For this Brand</p>
+        <p className="text-xl font-bold text-center">
+          No Car Listed For this Brand
+        </p>
       ) : (
         <div className="grid grid-cols-3 gap-3 container mx-auto">
           {listing.map((item, index) => (

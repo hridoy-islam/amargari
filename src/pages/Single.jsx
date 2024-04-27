@@ -10,18 +10,20 @@ import { PiRoadHorizonLight } from "react-icons/pi";
 import { CiShoppingTag } from "react-icons/ci";
 import { IoColorPaletteOutline, IoLocationOutline } from "react-icons/io5";
 import { CarGridView } from "../components/CarGridView";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../axios";
 
 export function Single() {
   const { id } = useParams();
   const [car, setCar] = useState();
+  const [related, setRelated] = useState([]);
   const fetchData = async () => {
     const res = await axiosInstance.get(`/cars/${id}`);
     if (res.data.success) {
       setCar(res.data.data);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, [id]);
@@ -30,11 +32,11 @@ export function Single() {
       <div className="mx-auto container grid grid-cols-1 md:grid-cols-2 gap-8">
         <ProductSlider gallery={car?.gallery} />
         <div>
-          <Typography className="mb-2" variant="h3">
+          <Typography className="mb-0" variant="h4">
             {car?.title}
           </Typography>
-          <Typography variant="h4">Model : Axio</Typography>
-          <Typography variant="h2" className="text-primary">
+          <Typography variant="h6">Model : Axio</Typography>
+          <Typography variant="h4" className="text-primary">
             BDT {car?.price}
           </Typography>
 
@@ -168,15 +170,9 @@ export function Single() {
           <Typography variant="h4"> We will help you!</Typography>
         </div>
         <div>
-          <Button className="bg-primary text-white ">Sell Your Car</Button>
-        </div>
-      </div>
-      <div className="mx-auto container my-8 shadow-xl p-6 rounded-lg">
-        <Typography variant="h4"> You May Also Like </Typography>
-        <div className="grid grid-cols-3 gap-3">
-          <CarGridView />
-          <CarGridView />
-          <CarGridView />
+          <Button className="bg-primary text-white ">
+            <Link to="/dashboard/postads">Sell Your Car</Link>
+          </Button>
         </div>
       </div>
     </section>

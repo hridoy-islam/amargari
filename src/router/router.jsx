@@ -24,6 +24,7 @@ import { Privacy } from "../pages/Privacy";
 import { Terms } from "../pages/Terms";
 import DashboardGuard from "../components/Admin/DashboardGuard";
 import { About } from "../pages/About";
+import { RentCar } from "../pages/RentCar";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/privacy-policy",
         element: <Privacy />,
+      },
+      {
+        path: "/rentcar",
+        element: <RentCar />,
       },
     ],
   },
