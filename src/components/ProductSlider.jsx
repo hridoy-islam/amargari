@@ -54,7 +54,7 @@ export function ProductSlider({ gallery }) {
             <img
               onClick={() => sliderRef.current.slickGoTo(index)}
               src={`https://res.cloudinary.com/dneodtbad/image/upload/${item}`}
-              className="h-24 max-w-full cursor-pointer rounded-lg object-cover object-center"
+              className="h-24 w-24 cursor-pointer rounded-lg object-cover object-center"
               alt="gallery-image"
             />
           </div>

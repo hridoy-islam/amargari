@@ -35,7 +35,7 @@ export function Single() {
           <Typography className="mb-0" variant="h4">
             {car?.title}
           </Typography>
-          <Typography variant="h6">Model : Axio</Typography>
+          <Typography variant="h6">Model : {car?.model}</Typography>
           <Typography variant="h4" className="text-primary">
             BDT {car?.price}
           </Typography>
@@ -45,8 +45,9 @@ export function Single() {
               <IoLocationOutline className="text-primary text-4xl" />
               <p>
                 {" "}
-                <span className="font-bold">Location</span> : {car?.division}
-                {car?.district}, Bangladesh
+                <span className="font-bold">Location</span> :{" "}
+                {`${car?.upazila}, ${car?.district}, ${car?.division}`},
+                Bangladesh
               </p>
             </div>
           </Card>
