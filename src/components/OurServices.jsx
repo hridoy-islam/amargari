@@ -46,7 +46,9 @@ export const OurServices = () => {
 
             {/* Text at bottom */}
             <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center">
-              <p className="text-xl font-bold">Buy Dream Car</p>
+              <Link to={"/search"}>
+                <p className="text-xl font-bold">Buy Dream Car</p>
+              </Link>
             </div>
           </div>
         </div>

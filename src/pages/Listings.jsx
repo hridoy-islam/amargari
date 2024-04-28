@@ -143,11 +143,18 @@ export function Listings() {
                       />
                     )}
                     {status == "approved" && (
-                      <Chip
-                        color="blue"
-                        value={status}
-                        className="text-center"
-                      />
+                      <>
+                        <Chip
+                          color="blue"
+                          value={status}
+                          className="text-center"
+                        />
+                        <Chip
+                          color="blue"
+                          value={"Mark As Sold"}
+                          className="text-center"
+                        />
+                      </>
                     )}
                     {status == "sold" && (
                       <Chip

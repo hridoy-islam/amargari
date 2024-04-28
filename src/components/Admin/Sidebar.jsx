@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/user/UserSlice";
+import { IoCarOutline } from "react-icons/io5";
 export function Sidebar() {
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -27,14 +28,15 @@ export function Sidebar() {
             Dashboard
           </ListItem>
         </Link>
-        <Link to="/dashboard/profile">
+        <Link to="/dashboard/postads">
           <ListItem>
             <ListItemPrefix>
-              <UserCircleIcon className="h-5 w-5" />
+              <IoCarOutline className="h-5 w-5" />
             </ListItemPrefix>
-            profile
+            Post Your Car
           </ListItem>
         </Link>
+
         <Link to="/dashboard/listings">
           <ListItem>
             <ListItemPrefix>
@@ -62,6 +64,14 @@ export function Sidebar() {
               <ShoppingBagIcon className="h-5 w-5" />
             </ListItemPrefix>
             Services
+          </ListItem>
+        </Link>
+        <Link to="/dashboard/profile">
+          <ListItem>
+            <ListItemPrefix>
+              <UserCircleIcon className="h-5 w-5" />
+            </ListItemPrefix>
+            profile
           </ListItem>
         </Link>
 

@@ -6,6 +6,14 @@ import { useForm } from "react-hook-form";
 import axiosInstance from "../axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaWhatsapp,
+  FaRegEnvelope,
+  FaLinkedinIn,
+} from "react-icons/fa";
 export const GetInTouch = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const {
@@ -51,6 +59,48 @@ export const GetInTouch = () => {
             <MdOutlineMarkEmailUnread className="text-2xl text-primary" />
             <p>garirmela@gmail.com</p>
           </div>
+          <ul className="flex items-center gap-4 text-2xl  mt-4">
+            <li>
+              <Link
+                to={"https://www.facebook.com/garirmelaa"}
+                className="text-primary"
+              >
+                <FaFacebookF />
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"https://www.instagram.com/garirmela/"}
+                className="text-primary"
+              >
+                <FaInstagram />
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"https://api.whatsapp.com/send?phone=01707070330"}
+                className="text-primary"
+              >
+                <FaWhatsapp />
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"mailto:garirmela54@gmail.com"}
+                className="text-primary"
+              >
+                <FaRegEnvelope />
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"https://www.linkedin.com/in/garirmela"}
+                className="text-primary"
+              >
+                <FaLinkedinIn />
+              </Link>
+            </li>
+          </ul>
         </Card>
         <Card className="px-4 py-10 shadow-sm bg-gray-100">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

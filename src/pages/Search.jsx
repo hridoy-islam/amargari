@@ -1,173 +1,335 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { CarGridView } from "../components/CarGridView";
+import { ServiceTitle } from "../components/ServiceTitle";
+import axiosInstance from "../axios";
+import { useForm, Controller } from "react-hook-form";
+import ReactSelect from "react-select";
+import makeAnimated from "react-select/animated";
+import Pagination from "../components/Pagination";
+import divisions from "../assets/divisions.json";
+import districtsData from "../assets/districts.json";
+import upazilasData from "../assets/upazilas.json";
+
 export const Search = () => {
+  const animatedComponents = makeAnimated();
+  const [listing, setListing] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [entriesPerPage, setEntriesPerPage] = useState(10);
+
+  const [districts, setDistricts] = useState([]);
+  const [upazilas, setUpazilas] = useState([]);
+
+  //search filter
+  const [selectedCarBrand, setSelectedCarBrand] = useState(null);
+  const [selectedCondition, setSelectedCondition] = useState(null);
+  const [selectedTransmition, setSelectedTransmition] = useState(null);
+  const [selectedDivision, setSelectedDivision] = useState(null);
+  const [selectDistrict, setSelectedDistrict] = useState(null);
+  const [selectUpazila, setSelectedUpazila] = useState(null);
+  const [selectedFuelType, setSelectedFuelType] = useState(null);
+
+  const fetchData = async (page, entriesPerPage, searchTerm = "") => {
+    try {
+      let url = `/cars?page=${page}&limit=${entriesPerPage}`;
+
+      if (selectedCarBrand) {
+        url += `&brand=${selectedCarBrand}`;
+      }
+      if (selectedCondition) {
+        url += `&condition=${selectedCondition}`;
+      }
+      if (selectedTransmition) {
+        url += `&transmition=${selectedTransmition}`;
+      }
+      if (selectedDivision) {
+        url += `&division=${selectedDivision}`;
+      }
+      if (selectDistrict) {
+        url += `&district=${selectDistrict}`;
+      }
+      if (selectUpazila) {
+        url += `&upazila=${selectUpazila}`;
+      }
+      if (selectedFuelType) {
+        url += `&fuelType=${selectedFuelType}`;
+      }
+      const response = await axiosInstance.get(url);
+      setListing(response.data.data.result);
+      setTotalPages(response.data.data.meta.totalPage);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData(currentPage, entriesPerPage);
+  }, [
+    currentPage,
+    entriesPerPage,
+    selectedCarBrand,
+    selectedCondition,
+    selectedTransmition,
+    selectedDivision,
+    selectDistrict,
+    selectUpazila,
+    selectedFuelType,
+  ]);
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  const condition = [
+    { value: "used", label: "Used" },
+    { value: "recondition", label: "Recondition" },
+  ];
+  const transmition = [
+    { value: "automatic", label: "Automatic" },
+    { value: "manual", label: "Manual" },
+  ];
+  const car_brands = [
+    { value: "Toyota", label: "Toyota" },
+    { value: "Honda", label: "Honda" },
+    { value: "Nissan", label: "Nissan" },
+    { value: "Suzuki", label: "Suzuki" },
+    { value: "Mitsubishi", label: "Mitsubishi" },
+    { value: "Hyundai", label: "Hyundai" },
+    { value: "Kia", label: "Kia" },
+    { value: "Ford", label: "Ford" },
+    { value: "Chevrolet", label: "Chevrolet" },
+    { value: "Volkswagen", label: "Volkswagen" },
+    { value: "Mercedes-Benz", label: "Mercedes-Benz" },
+    { value: "BMW", label: "BMW" },
+    { value: "Audi", label: "Audi" },
+    { value: "Mazda", label: "Mazda" },
+    { value: "Lexus", label: "Lexus" },
+    { value: "Isuzu", label: "Isuzu" },
+    { value: "Proton", label: "Proton" },
+    { value: "Tata", label: "Tata" },
+    { value: "Mahindra", label: "Mahindra" },
+    { value: "Renault", label: "Renault" },
+  ];
+  const fuelType = [
+    { value: "gas", label: "Gas" },
+    { value: "octen", label: "Octen" },
+    { value: "petrol", label: "Petrol" },
+    { value: "dissel", label: "Dissel" },
+    { value: "lpg", label: "LPG" },
+  ];
+
+  const handleDivisionChange = (selectedOption) => {
+    setSelectedDivision(selectedOption.value);
+    const filteredDistricts = districtsData.filter(
+      (district) => district.division_id === selectedOption.id
+    );
+    setSelectedDistrict(filteredDistricts);
+    // Reset selected district and upazila when division changes
+    setSelectedUpazila([]);
+  };
+
+  const handleDistrictChange = (selectedOption) => {
+    // Filter upazilas based on selected district
+    const filteredUpazilas = upazilasData.filter(
+      (upazila) => upazila.district_id === selectedOption.id
+    );
+    setSelectedUpazila(filteredUpazilas);
+  };
+  const handleCarBrandChange = (selectedOption) => {
+    setSelectedCarBrand(selectedOption ? selectedOption.value : null);
+  };
   return (
-   <>
-   
-   
-<div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
-  <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
-  <div className="lg:col-span-1 lg:w-full lg:h-full lg:bg-gradient-to-r lg:from-gray-50 lg:via-transparent lg:to-transparent dark:from-slate-800">
-      <div className="sticky top-0 start-0 py-8 lg:ps-8">
-    
-     <h4>অবস্থান নির্বাচন করুন</h4>
-    
+    <>
+      <ServiceTitle title="Buy Your Dream Car" description="Search your car" />
+      <div className="flex gap-4 container mx-auto py-10">
+        <div className="w-3/12 border border-gray-200 p-4 rounded-lg shadow-lg space-y-3">
+          <h2>Filters</h2>
+          <h4>Brands</h4>
 
-        <div className="space-y-6">
-      
-          <a className="group flex items-center gap-x-6" href="#">
-            <div className="grow">
-              <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-blue-500">
-                5 Reasons to Not start a UX Designer Career in 2022/2023
-              </span>
-            </div>
+          <ReactSelect
+            options={car_brands}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                borderColor: state.isFocused ? "black" : "grey",
+              }),
+            }}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 5,
+              colors: {
+                ...theme.colors,
+                primary: "black",
+              },
+              fontSize: "14px",
+            })}
+            placeholder="Car Brand"
+            onChange={(selectedOption) => {
+              handleCarBrandChange(selectedOption);
+            }}
+          />
+          <h4>Condition</h4>
 
-            <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-              <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Image Description" />
-            </div>
-          </a>
-      
+          <ReactSelect
+            options={condition}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                borderColor: state.isFocused ? "black" : "grey",
+              }),
+            }}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 5,
+              colors: {
+                ...theme.colors,
+                primary: "black",
+              },
+              fontSize: "14px",
+            })}
+            placeholder="Car Condition"
+            onChange={(selectedOption) => {
+              setSelectedCondition(
+                selectedOption ? selectedOption.value : null
+              );
+            }}
+          />
 
-   
-          <a className="group flex items-center gap-x-6" href="#">
-            <div className="grow">
-              <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-blue-500">
-                If your UX Portfolio has this 20% Well Done, it Will Give You an 80% Result
-              </span>
-            </div>
+          <h4>Transmition</h4>
 
-            <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-              <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1542125387-c71274d94f0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Image Description" />
-            </div>
-          </a>
+          <ReactSelect
+            options={transmition}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                borderColor: state.isFocused ? "black" : "grey",
+              }),
+            }}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 5,
+              colors: {
+                ...theme.colors,
+                primary: "black",
+              },
+              fontSize: "14px",
+            })}
+            placeholder="Transmition Type"
+            onChange={(selectedOption) => {
+              setSelectedTransmition(
+                selectedOption ? selectedOption.value : null
+              );
+            }}
+          />
+          {/* <h4>Fuel Type</h4>
 
+          <ReactSelect
+            isMulti
+            options={fuelType}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                borderColor: state.isFocused ? "black" : "grey",
+              }),
+            }}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 5,
+              colors: {
+                ...theme.colors,
+                primary: "black",
+              },
+            })}
+            components={animatedComponents}
+            placeholder="Fuel Type"
+            onChange={(selectedOption) => setSelectedFuelType(selectedOption)}
+          />
+          <h4>Division</h4>
 
-       
-          <a className="group flex items-center gap-x-6" href="#">
-            <div className="grow">
-              <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-blue-500">
-                7 Principles of Icon Design
-              </span>
-            </div>
+          <ReactSelect
+            options={divisions}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                borderColor: state.isFocused ? "black" : "grey",
+              }),
+            }}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 5,
+              colors: {
+                ...theme.colors,
+                primary: "black",
+              },
+            })}
+            placeholder="Division"
+            onChange={(selectedOption) => {
+              handleDivisionChange(selectedOption);
+            }}
+          />
+          <h4>District</h4>
 
-            <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-              <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Image Description" />
-            </div>
-          </a>
-   
+          <ReactSelect
+            options={districts}
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                borderColor: state.isFocused ? "black" : "grey",
+              }),
+            }}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 5,
+              colors: {
+                ...theme.colors,
+                primary: "black",
+              },
+            })}
+            placeholder="District"
+            onChange={(selectedOption) => {
+              handleDistrictChange(selectedOption);
+            }}
+          />
+          <h4>Upazila</h4>
+
+          <ReactSelect
+            options={upazilas}
+            placeholder="Upazila"
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                borderColor: state.isFocused ? "black" : "grey",
+              }),
+            }}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 5,
+              colors: {
+                ...theme.colors,
+                primary: "black",
+              },
+            })}
+            onChange={(selectedOption) => {
+              setSelectedUpazila(selectedOption ? selectedOption.value : null);
+            }}
+          /> */}
+        </div>
+
+        <div className="w-9/12 border border-gray-200 p-4 rounded-lg shadow-lg">
+          <div className="grid grid-cols-3 gap-4">
+            {listing?.length === 0 && (
+              <p className="text-xl">No Listings Found...</p>
+            )}
+            {listing?.map((item, index) => (
+              <CarGridView key={index} data={item} />
+            ))}
+          </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </div>
-    </div>
-    <div className="lg:col-span-2">
-      <div className="py-8 lg:pe-8">
-        <div className="space-y-5 lg:space-y-8">
-         
-
-  
-          <div className="max-w-6xl py-10 px-4 sm:px-6 lg:px-8 lg:py-16 mx-auto">
-  <div className="max-w-xl text-center mx-auto">
-    <div className="mb-5">
-      <h2 className="text-2xl font-bold md:text-3xl md:leading-tight dark:text-white">শ্রেণী নির্বাচন করুন</h2>
-    </div>
-
-    <form>
-      <div className="mt-5 lg:mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
-        <div className="w-full">
-          <label for="hero-input" className="sr-only">Search</label>
-          <input type="text" id="hero-input" name="hero-input" className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="আপনি কী খুঁজছেন?" />
-        </div>
-        <a className="w-full sm:w-auto whitespace-nowrap py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
-          Search
-        </a>
-      </div>
-    </form>
-  </div>
-</div>
-          <div className="space-y-6">
-      
-      <a className="group flex items-center gap-x-6" href="#">
-      <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-          <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Image Description" />
-        </div>
-        <div className="grow">
-          <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-blue-500">
-          <p> car rental</p>
-          <p>ঢাকা, রেন্টাল</p>
-          <p> আলোচনা সাপেক্ষে </p>
-          </span>
-          
-        </div>
-
-    
-      </a>
-  
-      <a className="group flex items-center gap-x-6" href="#">
-      <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-          <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Image Description" />
-        </div>
-        <div className="grow">
-          <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-blue-500">
-          <p> car rental</p>
-          <p>ঢাকা, রেন্টাল</p>
-          <p> আলোচনা সাপেক্ষে </p>
-          </span>
-          
-        </div>
-
-    
-      </a>
-
-      <a className="group flex items-center gap-x-6" href="#">
-      <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-          <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Image Description" />
-        </div>
-        <div className="grow">
-          <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-blue-500">
-          <p> car rental</p>
-          <p>ঢাকা, রেন্টাল</p>
-          <p> আলোচনা সাপেক্ষে </p>
-          </span>
-          
-        </div>
-
-    
-      </a>
-      <a className="group flex items-center gap-x-6" href="#">
-      <div className="flex-shrink-0 relative rounded-lg overflow-hidden size-20">
-          <img className="size-full absolute top-0 start-0 object-cover rounded-lg" src="https://images.unsplash.com/photo-1567016526105-22da7c13161a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Image Description" />
-        </div>
-        <div className="grow">
-          <span className="text-sm font-bold text-gray-800 group-hover:text-blue-600 dark:text-gray-200 dark:group-hover:text-blue-500">
-          <p> car rental</p>
-          <p>ঢাকা, রেন্টাল</p>
-          <p> আলোচনা সাপেক্ষে </p>
-          </span>
-          
-        </div>
-
-    
-      </a>
-
-    
-
-    </div>
-
-    
-
-
-
-    
-        </div>
-      </div>
-    </div>
-
-
-
- 
-
-  </div>
-</div>
-
-
-   </>
+    </>
   );
 };

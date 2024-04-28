@@ -9,10 +9,11 @@ import {
   ListItem,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
+import { RiLogoutCircleLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/user/UserSlice";
 
 function NavList() {
   return (
@@ -29,25 +30,18 @@ function NavList() {
         </ListItem>
       </Typography>
 
-      <Typography
-        as="a"
-        href="#"
-        variant="h6"
-        color="blue-gray"
-        className="font-medium"
-      >
+      <Typography as="a" variant="h6" color="blue-gray" className="font-medium">
         <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
-          <Link to="/carwash">Car Wash</Link>
+          <Link to="/search">Find Your Car</Link>
+        </ListItem>
+      </Typography>
+      <Typography as="a" variant="h6" color="blue-gray" className="font-medium">
+        <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
+          <Link to="/carwash">Home Service</Link>
         </ListItem>
       </Typography>
 
-      <Typography
-        as="a"
-        href="#"
-        variant="h6"
-        color="blue-gray"
-        className="font-medium"
-      >
+      <Typography as="a" variant="h6" color="blue-gray" className="font-medium">
         <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
           <Link to="/contact">Contact</Link>
         </ListItem>
@@ -65,18 +59,20 @@ export function Header() {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    // Dispatch the logout action
+    dispatch(logout());
+    // Clear the persisted state from local storage
+    localStorage.removeItem("persist:garirmela");
+  };
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   return (
     <Navbar className="mx-auto px-4 shadow-sm">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer lg:ml-2"
-        >
+        <Typography as="a" variant="h6" className="mr-4 cursor-pointer lg:ml-2">
           <Link to="/">
             <img src={logo} alt="garir mela" />
           </Link>
@@ -90,9 +86,14 @@ export function Header() {
               <Link to={"/dashboard"}>
                 <Button className="bg-primary">Dashboard</Button>
               </Link>
-              <Link to={"/dashboard/postads"}>
-                <Button className="bg-primary">Post Your Car</Button>
-              </Link>
+
+              <Button
+                onClick={handleLogout}
+                size="sm"
+                className="bg-primary flex items-center"
+              >
+                Log Out <RiLogoutCircleLine className="text-lg ml-1" />
+              </Button>
             </>
           )}
           {!isAuthenticated && (
@@ -122,12 +123,32 @@ export function Header() {
       <Collapse open={openNav}>
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
-            <Link to={"/login"}>Log In</Link>
-          </Button>
-          <Button variant="gradient" size="sm" fullWidth>
-            <Link to={"/signup"}> Sign Up</Link>
-          </Button>
+          {isAuthenticated && (
+            <>
+              <Button size="sm" className="bg-primary" fullWidth>
+                <Link to={"/dashboard"}>Dashboard</Link>
+              </Button>
+
+              <Button
+                size="sm"
+                className="bg-primary flex items-center justify-center"
+                fullWidth
+                onClick={handleLogout}
+              >
+                Log Out <RiLogoutCircleLine className="text-lg ml-2" />
+              </Button>
+            </>
+          )}
+          {!isAuthenticated && (
+            <>
+              <Button variant="outlined" size="sm" color="blue-gray" fullWidth>
+                <Link to={"/login"}>Log In</Link>
+              </Button>
+              <Button variant="gradient" size="sm" fullWidth>
+                <Link to={"/signup"}> Sign Up</Link>
+              </Button>
+            </>
+          )}
         </div>
       </Collapse>
     </Navbar>

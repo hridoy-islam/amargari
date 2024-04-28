@@ -1,7 +1,7 @@
 import { ServiceTitle } from "../components/ServiceTitle";
 import { CarWashFaq } from "../components/CarWashFaq";
 import CarWashBooking from "../components/CarWashBooking";
-import { Testimonial } from "../components/Testimonial";
+// import { Testimonial } from "../components/Testimonial";
 import { useSelector } from "react-redux";
 import { LoginCTA } from "../components/LoginCTA";
 
@@ -46,7 +46,7 @@ export const CarWash = () => {
             />
           </div>
         </div>
-        <Testimonial />
+        {/* <Testimonial /> */}
         {!isAuthenticated ? <LoginCTA /> : <CarWashBooking />}
 
         <CarWashFaq />
