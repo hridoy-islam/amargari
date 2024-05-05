@@ -18,7 +18,7 @@ export function Sidebar() {
     localStorage.removeItem("persist:garirmela");
   };
   return (
-    <Card className=" w-full max-w-[20rem] shadow-md">
+    <Card className="shadow-md">
       <List>
         <Link to="/dashboard">
           <ListItem>

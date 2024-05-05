@@ -2,10 +2,26 @@ import { ServiceTitle } from "../components/ServiceTitle";
 import {
   Card
 } from "@material-tailwind/react";
+import { Helmet } from 'react-helmet';
+import bread from "../assets/breadcumb.jpeg";
 
 export const About = () => {
   return (
     <div>
+      <Helmet>
+        <title>About - Garir Mela</title>
+        <meta name="description" content="Welcome to Garirmela.com, where we're reinventing automotiveexperiences in Bangladesh." />
+        <meta name="keywords" content="garir mela" />
+        <meta name="author" content="GarirMela" />
+        <meta property="og:title" content="About - Garir Mela" />
+        <meta property="og:description" content="Welcome to Garirmela.com, where we're reinventing automotiveexperiences in Bangladesh." />
+        <meta property="og:image" content={bread} />
+        <meta property="og:url" content={bread} />
+        <meta name="twitter:title" content="Welcome to Garirmela.com, where we're reinventing automotiveexperiences in Bangladesh." />
+        <meta name="twitter:description" content="Welcome to Garirmela.com, where we're reinventing automotiveexperiences in Bangladesh." />
+        <meta name="twitter:image" content={bread} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <ServiceTitle
         title="About"
         description="Leading Car Marketplace in Bangladesh"
@@ -42,7 +58,7 @@ export const About = () => {
         </p>
         <div className="my-6">
           <h2 className="text-center">Why Us?</h2>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Card className="p-4">
               <h4>Selection Car</h4>
               <p>You can choose from a wide selection of vehicles. Find the perfect car that fits your lifestyle and budget, from the newest models to pre-owned gems</p>

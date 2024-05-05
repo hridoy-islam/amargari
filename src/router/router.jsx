@@ -5,7 +5,6 @@ import { NotFound } from "../components/NotFound";
 import Main from "../layouts/main";
 import { Contact } from "../pages/Contact";
 import { CarWash } from "../pages/CarWash";
-import { Consultancy } from "../pages/Consultancy";
 import { Search } from "../pages/Search";
 import { Single } from "../pages/Single";
 import { Dashboard } from "../pages/Dashboard";
@@ -13,13 +12,11 @@ import { Signin } from "../pages/Signin";
 import { Signup } from "../pages/Signup";
 import { Profile } from "../pages/Profile";
 import { Service } from "../pages/Service";
-import { Posts } from "../pages/Posts";
 import DashboardLayout from "../layouts/DashboardLayout";
 import { PostAds } from "../pages/PostAds";
 import { Login } from "../pages/Login";
 import { Listings } from "../pages/Listings";
 import { BrandPage } from "../pages/BrandPage";
-import { LocationPage } from "../pages/LocationPage";
 import { Privacy } from "../pages/Privacy";
 import { Terms } from "../pages/Terms";
 import DashboardGuard from "../components/Admin/DashboardGuard";
@@ -51,10 +48,7 @@ const router = createBrowserRouter([
         path: "/carwash",
         element: <CarWash />,
       },
-      {
-        path: "/consultancy",
-        element: <Consultancy />,
-      },
+      
       {
         path: "/contact",
         element: <Contact />,
@@ -71,10 +65,7 @@ const router = createBrowserRouter([
         path: "/brand/:name",
         element: <BrandPage />,
       },
-      {
-        path: "/location/:name",
-        element: <LocationPage />,
-      },
+      
       {
         path: "/terms-condition",
         element: <Terms />,
@@ -108,10 +99,6 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/listings",
         element: <Listings />,
-      },
-      {
-        path: "/dashboard/Posts",
-        element: <Posts />,
       },
       {
         path: "/dashboard/postads",

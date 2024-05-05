@@ -12,6 +12,7 @@ import { IoColorPaletteOutline, IoLocationOutline } from "react-icons/io5";
 import { CarGridView } from "../components/CarGridView";
 import { Link, useParams } from "react-router-dom";
 import axiosInstance from "../axios";
+import { Helmet } from "react-helmet";
 
 export function Single() {
   const { id } = useParams();
@@ -28,6 +29,22 @@ export function Single() {
     fetchData();
   }, [id]);
   return (
+    <>
+    <Helmet>
+        <title>{car?.title}</title>
+        <meta name="description" content={`${car?.title} For Sale near ${car?.upazila}, ${car?.district}, ${car?.division}`} />
+        <meta name="keywords" content={`${car?.title} garir mela, Dhaka, Car Wash, Car, Car Home Service`} />
+        <meta name="author" content={`${car?.title}`} />
+        <meta property="og:title" content={`${car?.title}`} />
+        <meta property="og:description" content={`${car?.title} For Sale near ${car?.upazila}, ${car?.district}, ${car?.division}`} />
+        <meta property="og:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta property="og:url" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:title" content={`${car?.title}`} />
+        <meta name="twitter:description" content={`${car?.title} For Sale near ${car?.upazila}, ${car?.district}, ${car?.division}`} />
+        <meta name="twitter:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+    
     <section className="py-16 px-8">
       <div className="mx-auto container grid grid-cols-1 md:grid-cols-2 gap-8">
         <ProductSlider gallery={car?.gallery} />
@@ -177,6 +194,7 @@ export function Single() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 

@@ -19,8 +19,8 @@ const currentYear = new Date().getFullYear();
 export function Footer() {
   return (
     <footer className="bg-gray-200 mt-10">
-      <div className="container mx-auto flex pt-10">
-        <div className="w-6/12">
+      <div className="container mx-auto flex flex-wrap pt-10">
+        <div className="sm:w-12/12 md:w-12/12 lg:w-6/12">
           <Link to="/">
             <img src={logo} alt="garir mela" />
           </Link>
@@ -73,7 +73,7 @@ export function Footer() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col w-2/12 justify-center gap-2 pb-8">
+        <div className="flex flex-col sm:w-6/12 md:w-4/12 lg:w-2/12 justify-center gap-2 pb-8">
           <h4>Our Services</h4>
 
           <ul className="space-y-2">
@@ -100,7 +100,7 @@ export function Footer() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col w-2/12 justify-center gap-2 pb-8">
+        <div className="flex flex-col sm:w-6/12 md:w-4/12 lg:w-2/12 justify-center gap-2 pb-8">
           <h4>Top Car Brands</h4>
 
           <ul className="space-y-2">
@@ -127,19 +127,19 @@ export function Footer() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col w-2/12 justify-center gap-2 pb-8">
+        <div className="flex flex-col sm:w-6/12 md:w-4/12 lg:w-2/12 justify-center gap-2 pb-8">
           <h4>Quick Links</h4>
           {links.map((link, index) => (
             <ul key={index} className="space-y-2">
               <li>
-                <Typography
+                <Link
                   as="a"
-                  href={link.slug}
-                  color="white"
+                  to={link.slug}
+                  
                   className="font-medium text-secondary hover:text-primary"
                 >
                   {link.name}
-                </Typography>
+                </Link>
               </li>
             </ul>
           ))}

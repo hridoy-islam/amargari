@@ -2,7 +2,6 @@ import React from "react";
 import {
   Navbar,
   Collapse,
-  Typography,
   Button,
   IconButton,
   List,
@@ -17,35 +16,32 @@ import { logout } from "../store/user/UserSlice";
 
 function NavList() {
   return (
-    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 items-end">
-      <Typography
-        as="a"
-        href="/"
-        variant="h6"
-        color="blue-gray"
+    <List  className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 items-end">
+      <Link
+        to="/"
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
           Home
         </ListItem>
-      </Typography>
+      </Link>
 
-      <Typography as="a" variant="h6" color="blue-gray" className="font-medium">
+      <Link className="font-medium" to="/search">
         <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
-          <Link to="/search">Find Your Car</Link>
+          Find Your Car
         </ListItem>
-      </Typography>
-      <Typography as="a" variant="h6" color="blue-gray" className="font-medium">
+      </Link>
+      <Link to="/carwash" className="font-medium">
         <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
-          <Link to="/carwash">Home Service</Link>
+          Home Service
         </ListItem>
-      </Typography>
+      </Link>
 
-      <Typography as="a" variant="h6" color="blue-gray" className="font-medium">
+      <Link to="/contact" className="font-medium">
         <ListItem className="flex items-center gap-2 py-2 pr-4 text-secondary font-semibold">
-          <Link to="/contact">Contact</Link>
+          Contact
         </ListItem>
-      </Typography>
+      </Link>
     </List>
   );
 }
@@ -72,11 +68,11 @@ export function Header() {
   return (
     <Navbar className="mx-auto px-4 shadow-sm">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography as="a" variant="h6" className="mr-4 cursor-pointer lg:ml-2">
-          <Link to="/">
+        
+          <Link to="/" className="mr-4 cursor-pointer lg:ml-2">
             <img src={logo} alt="garir mela" />
           </Link>
-        </Typography>
+        
         <div className="hidden lg:block">
           <NavList />
         </div>

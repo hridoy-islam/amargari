@@ -1,8 +1,23 @@
+import { Helmet } from "react-helmet";
 import { ServiceTitle } from "../components/ServiceTitle";
 
 export const Terms = () => {
   return (
     <div>
+      <Helmet>
+        <title>Terms and Conditions of Garirmela.com</title>
+        <meta name="description" content="Garir Mela is the best place in Dhaka, Bangladesh, where you can buy and sell used cars at the best prices" />
+        <meta name="keywords" content="garir mela, Dhaka, Car Wash, Car, Car Home Service" />
+        <meta name="author" content="GarirMela" />
+        <meta property="og:title" content="Terms and Conditions of Garirmela.com" />
+        <meta property="og:description" content="Garir Mela is the best place in Dhaka, Bangladesh, where you can buy and sell used cars at the best prices" />
+        <meta property="og:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta property="og:url" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:title" content="Terms and Conditions of Garirmela.com" />
+        <meta name="twitter:description" content="Garir Mela is the best place in Dhaka, Bangladesh, where you can buy and sell used cars at the best prices" />
+        <meta name="twitter:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <ServiceTitle
         title="Terms and Conditions of Garirmela.com "
         description="Online Car Marketplace"

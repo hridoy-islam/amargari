@@ -1,8 +1,26 @@
+import { Helmet } from "react-helmet";
 import { ServiceTitle } from "../components/ServiceTitle";
 
 export const Privacy = () => {
   return (
     <>
+    <Helmet>
+        <title>Privacy Policy - Garir Mela</title>
+        <meta name="description" content="Privacy Policy outlines how we collect, use, disclose, and protect the
+          information provided to us through the garirmela.com" />
+        <meta name="keywords" content="garir mela, Dhaka, Car Wash, Car, Car Home Service" />
+        <meta name="author" content="GarirMela" />
+        <meta property="og:title" content="Login - Garir Mela" />
+        <meta property="og:description" content="Privacy Policy outlines how we collect, use, disclose, and protect the
+          information provided to us through the garirmela.com" />
+        <meta property="og:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta property="og:url" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:title" content="Privacy Policy - Garir Mela" />
+        <meta name="twitter:description" content="Privacy Policy outlines how we collect, use, disclose, and protect the
+          information provided to us through the garirmela.com" />
+        <meta name="twitter:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <ServiceTitle
         title="Privacy Policy for GarirMela.com"
         description="Effective Date: April 10, 2024"
