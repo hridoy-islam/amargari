@@ -24,7 +24,7 @@ export function Signup() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/auth/signup",
+        `${import.meta.env.VITE_API_URL}/auth/signup`,
         data
       );
       // Check if response indicates success

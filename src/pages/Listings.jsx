@@ -1,7 +1,6 @@
 import { Card, Chip, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-const TABLE_HEAD = ["Name", "Job", "Employed", ""];
 
 import axiosInstance from "../axios";
 import { Link } from "react-router-dom";
@@ -11,7 +10,7 @@ export function Listings() {
   const [listing, setListing] = useState(null);
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get("/cars?");
+      const response = await axiosInstance.get(`/cars?userid=${user._id}`);
       setListing(response.data.data.result);
       console.log(listing);
     } catch (error) {

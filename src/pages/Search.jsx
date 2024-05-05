@@ -9,6 +9,7 @@ import Pagination from "../components/Pagination";
 import divisions from "../assets/divisions.json";
 import districtsData from "../assets/districts.json";
 import upazilasData from "../assets/upazilas.json";
+import { Input } from "@material-tailwind/react";
 
 export const Search = () => {
   const animatedComponents = makeAnimated();
@@ -29,10 +30,11 @@ export const Search = () => {
   const [selectDistrict, setSelectedDistrict] = useState(null);
   const [selectUpazila, setSelectedUpazila] = useState(null);
   const [selectedFuelType, setSelectedFuelType] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(null);
 
   const fetchData = async (page, entriesPerPage, searchTerm = "") => {
     try {
-      let url = `/cars?page=${page}&limit=${entriesPerPage}`;
+      let url = `/cars?page=${page}&limit=${entriesPerPage}&status=approve`;
 
       if (selectedCarBrand) {
         url += `&brand=${selectedCarBrand}`;
@@ -42,6 +44,9 @@ export const Search = () => {
       }
       if (selectedTransmition) {
         url += `&transmition=${selectedTransmition}`;
+      }
+      if (selectedYear) {
+        url += `&registration_year=${selectedYear}`;
       }
       if (selectedDivision) {
         url += `&division=${selectedDivision}`;
@@ -136,6 +141,13 @@ export const Search = () => {
   const handleCarBrandChange = (selectedOption) => {
     setSelectedCarBrand(selectedOption ? selectedOption.value : null);
   };
+
+  // year
+
+  const years = [];
+  for (let year = 2024; year >= 1990; year--) {
+    years.push({ value: year, label: year });
+  }
   return (
     <>
       <ServiceTitle title="Buy Your Dream Car" description="Search your car" />
@@ -219,6 +231,28 @@ export const Search = () => {
               );
             }}
           />
+          {/* <h4>Registration Year</h4>
+          <ReactSelect
+            options={years}
+            placeholder="Year"
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                borderColor: state.isFocused ? "black" : "grey",
+              }),
+            }}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 5,
+              colors: {
+                ...theme.colors,
+                primary: "black",
+              },
+            })}
+            onChange={(selectedOption) => {
+              setSelectedYear(selectedOption ? selectedOption.value : null);
+            }}
+          /> */}
           {/* <h4>Fuel Type</h4>
 
           <ReactSelect

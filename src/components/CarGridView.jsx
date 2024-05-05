@@ -17,7 +17,7 @@ export const CarGridView = ({ data }) => {
       <div className="absolute top-4 left-4 z-10">
         <Chip
           value={data?.condition}
-          className="rounded-full w-20 text-center bg-primary"
+          className="rounded-full text-center bg-primary"
         />
       </div>
 
@@ -28,14 +28,18 @@ export const CarGridView = ({ data }) => {
             {data?.title}
           </p>
         </Link>
+        <p className="font-semibold">BDT {data?.price}</p>
       </div>
       <div className="flex justify-between">
-        <p className="">BDT {data?.price}</p>
         <p className="text-black flex items-center gap-1">
           <IoLocationOutline /> <span>{data?.district}</span>
         </p>
+        <div className="flex items-center">
+          <PiRoadHorizonLight className="text-primary text-xl mr-1" />
+          <span>{data?.kilometer} K.M</span>
+        </div>
       </div>
-      <div className="flex">
+      <div className="flex justify-between mb-2">
         <div className="flex items-center">
           <RiGasStationLine className="text-primary text-xl" />
           {data?.fuelType.map((item, index) => (
@@ -46,13 +50,8 @@ export const CarGridView = ({ data }) => {
         </div>
         <div className="flex items-center">
           <PiRoadHorizonLight className="text-primary text-xl mr-1" />
-          <span>{data?.kilometer} K.M</span>
+          <span>{data?.engine_capacity} CC</span>
         </div>
-      </div>
-
-      <div className="flex items-center">
-        <PiRoadHorizonLight className="text-primary text-xl mr-1" />
-        <span>{data?.engine_capacity} CC</span>
       </div>
 
       {/* Action Button */}

@@ -111,8 +111,9 @@ export const PostAds = () => {
       const response = await axiosInstance.post("/cars", formData);
 
       if (response.data.success) {
-        toast.success("Car Posted successfully");
         reset();
+        setPublicIds([]);
+        toast.success("Car Posted successfully");
         navigate("/dashboard/listings");
       }
     } catch (error) {
@@ -167,11 +168,13 @@ export const PostAds = () => {
             ))}
           </div>
         </div>
+
         <Input
           type="text"
           label="Title"
           {...register("title", { required: true })}
         />
+
         <Controller
           name="brand"
           control={control}
@@ -199,6 +202,7 @@ export const PostAds = () => {
             />
           )}
         />
+
         {errors.brand && <span>This field is required</span>}
         <Input
           type="text"
