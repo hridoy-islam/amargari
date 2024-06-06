@@ -93,7 +93,7 @@ export const PostAds = () => {
       const brand = data.brand.value;
       const condition = data.condition.value;
       const transmition = data.transmition.value;
-      const userid = user?._id;
+      const user_id = user?.id;
       const gallery = publicIds;
 
       const formData = {
@@ -104,7 +104,7 @@ export const PostAds = () => {
         brand,
         condition,
         transmition,
-        userid,
+        user_id,
         gallery,
       };
 

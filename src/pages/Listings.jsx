@@ -10,7 +10,7 @@ export function Listings() {
   const [listing, setListing] = useState(null);
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get(`/cars?userid=${user._id}`);
+      const response = await axiosInstance.get(`/cars?user_id=${user.id}`);
       setListing(response.data.data.result);
       console.log(listing);
     } catch (error) {

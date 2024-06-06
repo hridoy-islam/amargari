@@ -17,9 +17,9 @@ const CarWashBooking = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const userid = user._id;
+    const user_id = user.id;
     const bookingDate = moment(data.date).format();
-    const formData = { ...data, bookingDate, userid };
+    const formData = { ...data, bookingDate, user_id };
 
     console.log(formData);
     try {
@@ -106,7 +106,7 @@ const CarWashBooking = () => {
         </button>
         {submitSuccess && (
           <div style={{ color: "green" }}>
-            Your Booked Our Service successfully! Please Check your email
+            You Booked Our Service successfully!
           </div>
         )}
       </form>

@@ -4,11 +4,19 @@ import { IoLocationOutline } from "react-icons/io5";
 import { RiGasStationLine } from "react-icons/ri";
 import { PiRoadHorizonLight } from "react-icons/pi";
 export const CarGridView = ({ data }) => {
+  const galleryArray = JSON.parse(data?.gallery);
+
   return (
     <div className="border border-gray-300 p-2 rounded-lg relative shadow-md">
       {/* Image */}
-      <img
+      {/* <img
         src={`https://res.cloudinary.com/dneodtbad/image/upload/${data?.gallery[0]}`}
+        alt={data?.title}
+        className="w-full h-60 rounded-lg"
+      /> */}
+
+      <img
+        src={galleryArray[0]}
         alt={data?.title}
         className="w-full h-60 rounded-lg"
       />
@@ -44,7 +52,7 @@ export const CarGridView = ({ data }) => {
           <RiGasStationLine className="text-primary text-xl" />
           {data?.fuelType.map((item, index) => (
             <span className="text-md mx-1" key={index}>
-              {item.label}
+              {item}
             </span>
           ))}
         </div>
@@ -55,7 +63,7 @@ export const CarGridView = ({ data }) => {
       </div>
 
       {/* Action Button */}
-      <Link to={`/car/${data?._id}`} className=" text-primary font-bold">
+      <Link to={`/car/${data?.id}`} className=" text-primary font-bold">
         View Details
       </Link>
     </div>

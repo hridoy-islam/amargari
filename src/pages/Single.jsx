@@ -24,13 +24,20 @@ export function Single() {
     }
   };
 
+  console.log(car?.gallery);
+
+  const galleryArray = car?.gallery ? JSON.parse(car.gallery) : [];
+
+  console.log(galleryArray);
+
   useEffect(() => {
     fetchData();
+    window.scrollTo(0, 0);
   }, [id]);
   return (
     <section className="py-16 px-8">
       <div className="mx-auto container grid grid-cols-1 md:grid-cols-2 gap-8">
-        <ProductSlider gallery={car?.gallery} />
+        <ProductSlider gallery={galleryArray} />
         <div>
           <Typography className="mb-0" variant="h4">
             {car?.title}

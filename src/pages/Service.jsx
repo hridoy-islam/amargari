@@ -18,7 +18,7 @@ export function Service() {
   const [booking, setBooking] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get(`/booking?userid=${user._id}`);
+      const response = await axiosInstance.get(`/booking?user_id=${user.id}`);
       if (response.data.success) {
         setBooking(response.data.data.result);
       }
@@ -107,6 +107,7 @@ export function Service() {
                       {address}
                     </Typography>
                   </td>
+
                   <td className={classes}>
                     {status == "pending" && (
                       <Chip

@@ -24,11 +24,11 @@ export function Signup() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/signup`,
+        `${import.meta.env.VITE_API_URL}/register`,
         data
       );
       // Check if response indicates success
-      if (response.data.success) {
+      if (response.data.token) {
         toast.success("Sign up successful!");
         navigate("/login");
       } else {
