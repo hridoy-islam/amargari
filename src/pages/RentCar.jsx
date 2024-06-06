@@ -1,8 +1,25 @@
 import { Button, Typography } from "@material-tailwind/react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 export const RentCar = () => {
   return (
+    <>
+    <Helmet>
+        <title>Rent A Car - Garir Mela</title>
+        <meta name="description" content="Best Rent a Car in Dhaka — We Believe In Transparency, With Absolutely No Hidden Charges In Any Form." />
+        <meta name="keywords" content="garir mela, Dhaka, Car Wash, Car, Car Home Service" />
+        <meta name="author" content="GarirMela" />
+        <meta property="og:title" content="Rent A Car - Garir Mela" />
+        <meta property="og:description" content="Best Rent a Car in Dhaka — We Believe In Transparency, With Absolutely No Hidden Charges In Any Form." />
+        <meta property="og:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta property="og:url" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:title" content="Rent A Car - Garir Mela" />
+        <meta name="twitter:description" content="Best Rent a Car in Dhaka — We Believe In Transparency, With Absolutely No Hidden Charges In Any Form." />
+        <meta name="twitter:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+   
     <div className="h-screen mx-auto grid place-items-center text-center px-8">
       <div>
         <Typography
@@ -21,5 +38,6 @@ export const RentCar = () => {
         </Button>
       </div>
     </div>
+    </>
   );
 };

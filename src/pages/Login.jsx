@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../store/user/UserSlice";
 import { useEffect } from "react";
 import login from "../assets/login.jpeg";
+import { Helmet } from "react-helmet";
 
 export function Login() {
   const dispatch = useDispatch();
@@ -30,10 +31,26 @@ export function Login() {
   }, [isAuthenticated]);
 
   return (
+    <>
+    <Helmet>
+        <title>Login - Garir Mela</title>
+        <meta name="description" content="We're your reliable partner in navigating the world of cars with ease and confidence, trusted by car owners nationwide." />
+        <meta name="keywords" content="garir mela, Dhaka, Car Wash, Car, Car Home Service" />
+        <meta name="author" content="GarirMela" />
+        <meta property="og:title" content="Login - Garir Mela" />
+        <meta property="og:description" content="We're your reliable partner in navigating the world of cars with ease and confidence, trusted by car owners nationwide." />
+        <meta property="og:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta property="og:url" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:title" content="Login - Garir Mela." />
+        <meta name="twitter:description" content="We're your reliable partner in navigating the world of cars with ease and confidence, trusted by car owners nationwide." />
+        <meta name="twitter:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+    
     <div className="container mx-auto py-20 align-middle">
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <img src={login} alt={"login"} />
+          <img src={login} alt={"login"} className="hidden lg:block " />
         </div>
         <div className="mx-auto">
           <Card shadow={false}>
@@ -83,5 +100,6 @@ export function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }

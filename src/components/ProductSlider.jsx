@@ -23,6 +23,24 @@ export function ProductSlider({ gallery }) {
     sliderRef.current.slickPrev();
   };
 
+  if (!gallery || gallery?.length === 0) {
+    return null; 
+  }
+
+  if (gallery?.length === 1) {
+    // If only one image, display it without slider
+    return (
+      <div className="relative">
+        <img
+          src={`https://res.cloudinary.com/dneodtbad/image/upload/${gallery[0]}`}
+          className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[500px]"
+          alt="gallery-image"
+        />
+      </div>
+    );
+  }
+
+
   return (
     <div className="relative">
       <Slider ref={sliderRef} {...settings}>

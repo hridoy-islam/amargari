@@ -6,11 +6,15 @@ const DashboardLayout = () => {
   return (
     <div className="font-cabin font-normal">
       <Header />
-      <div className="flex container mx-auto mt-5 gap-6">
-        <Sidebar></Sidebar>
-        <Card className="p-4 w-full shadow-md">
-          <Outlet></Outlet>
-        </Card>
+      <div className=" container mx-auto mt-5 gap-6 lg:flex">
+      <div className="lg:w-2/12">
+          <Sidebar />
+        </div>
+        <div className="lg:w-10/12">
+          <Card className="p-4  shadow-md">
+            <Outlet />
+          </Card>
+        </div>
       </div>
     </div>
   );

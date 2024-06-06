@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import signup from "../assets/signup.jpg";
+import { Helmet } from "react-helmet";
 export function Signup() {
   const navigate = useNavigate();
 
@@ -45,10 +46,26 @@ export function Signup() {
     }
   }, [isAuthenticated]);
   return (
+    <>
+    <Helmet>
+        <title>Signup - Garir Mela</title>
+        <meta name="description" content="Garir Mela is a leading car buying and selling website in Bangladesh. Here you can find the best Recondition and used car." />
+        <meta name="keywords" content="garir mela, Dhaka, Car Wash, Car, Car Home Service" />
+        <meta name="author" content="GarirMela" />
+        <meta property="og:title" content="Signup - Garir Mela" />
+        <meta property="og:description" content="Garir Mela is a leading car buying and selling website in Bangladesh. Here you can find the best Recondition and used car." />
+        <meta property="og:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta property="og:url" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:title" content="Signup - Garir Mela" />
+        <meta name="twitter:description" content="Garir Mela is a leading car buying and selling website in Bangladesh. Here you can find the best Recondition and used car." />
+        <meta name="twitter:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
+    
     <div className="container mx-auto py-20 align-middle">
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
-          <img src={signup} alt={"signup"} />
+          <img src={signup} alt={"signup"} className="hidden lg:block "/>
         </div>
         <div className="mx-auto">
           <Card color="transparent" shadow={false}>
@@ -133,5 +150,6 @@ export function Signup() {
         </div>
       </div>
     </div>
+    </>
   );
 }

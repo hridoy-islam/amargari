@@ -10,6 +10,7 @@ import divisions from "../assets/divisions.json";
 import districtsData from "../assets/districts.json";
 import upazilasData from "../assets/upazilas.json";
 import { Input } from "@material-tailwind/react";
+import { Helmet } from "react-helmet";
 
 export const Search = () => {
   const animatedComponents = makeAnimated();
@@ -150,6 +151,20 @@ export const Search = () => {
   }
   return (
     <>
+    <Helmet>
+        <title>Cars For Sale Bangladesh at Garir Mela</title>
+        <meta name="description" content="Find the best deals on cars from the trusted dealers and sellers in Dhaka. Garir Mela has the largest collection of cars from top brands and latest models." />
+        <meta name="keywords" content="garir mela, Dhaka, Car Wash, Car, Car Home Service" />
+        <meta name="author" content="GarirMela" />
+        <meta property="og:title" content="Cars For Sale Bangladesh at Garir Mela" />
+        <meta property="og:description" content="Find the best deals on cars from the trusted dealers and sellers in Dhaka. Garir Mela has the largest collection of cars from top brands and latest models." />
+        <meta property="og:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta property="og:url" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:title" content="Cars For Sale Bangladesh at Garir Mela" />
+        <meta name="twitter:description" content="Find the best deals on cars from the trusted dealers and sellers in Dhaka. Garir Mela has the largest collection of cars from top brands and latest models." />
+        <meta name="twitter:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <ServiceTitle title="Buy Your Dream Car" description="Search your car" />
       <div className="flex gap-4 container mx-auto py-10">
         <div className="w-3/12 border border-gray-200 p-4 rounded-lg shadow-lg space-y-3">

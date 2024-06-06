@@ -17,6 +17,18 @@ export function Listings() {
       console.log(error);
     }
   };
+
+  const markSold = async(carid)=> {
+    try {
+      const payload = 'status=sold'
+      const response = await axiosInstance.patch(`/cars/${carid}`, payload);
+      setListing(response.data.data.result);
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchData();
   }, [user]);
@@ -70,6 +82,15 @@ export function Listings() {
                 Status
               </Typography>
             </th>
+            <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal leading-none opacity-70"
+              >
+                Mark  Sold
+              </Typography>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -83,8 +104,19 @@ export function Listings() {
               return (
                 <tr key={index}>
                   <td className={classes}>
-                    {status === "active" && (
+                    {status === "approve" && (
                       <Link to={`/car/${_id}`} target="_blank">
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="text-secondary"
+                        >
+                          {title}
+                        </Typography>
+                      </Link>
+                    )}
+                    {status === "pending" && (
+                      <Link to={``} target="_blank">
                         <Typography
                           variant="small"
                           color="blue-gray"
@@ -94,7 +126,7 @@ export function Listings() {
                         </Typography>
                       </Link>
                     )}
-                    {status === "pending" && (
+                    {status === "sold" && (
                       <Link to={``} target="_blank">
                         <Typography
                           variant="small"
@@ -141,18 +173,14 @@ export function Listings() {
                         className="text-center"
                       />
                     )}
-                    {status == "approved" && (
+                    {status == "approve" && (
                       <>
                         <Chip
                           color="blue"
                           value={status}
                           className="text-center"
                         />
-                        <Chip
-                          color="blue"
-                          value={"Mark As Sold"}
-                          className="text-center"
-                        />
+                        
                       </>
                     )}
                     {status == "sold" && (
@@ -162,6 +190,20 @@ export function Listings() {
                         className="text-center"
                       />
                     )}
+                  </td>
+                  <td>
+                  {status == "approve" && (
+                      <>
+                        <Chip
+                          color="red"
+                          value={'Sold'}
+                          className="text-center cursor-pointer"
+                          onClick={()=>markSold(_id)}
+                        />
+                        
+                      </>
+                    )}
+                  
                   </td>
                 </tr>
               );

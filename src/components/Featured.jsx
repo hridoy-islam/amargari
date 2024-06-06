@@ -18,7 +18,7 @@ export const Featured = () => {
   return (
     <div className="container mx-auto">
       <h2>Featured New Cars For Sale</h2>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {listing?.map((item, index) => (
           <CarGridView key={index} data={item} />
         ))}
