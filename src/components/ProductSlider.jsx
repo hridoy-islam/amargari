@@ -24,7 +24,7 @@ export function ProductSlider({ gallery }) {
   };
 
   if (!gallery || gallery?.length === 0) {
-    return null; 
+    return null;
   }
 
   if (gallery?.length === 1) {
@@ -40,18 +40,17 @@ export function ProductSlider({ gallery }) {
     );
   }
 
-
   return (
     <div className="relative">
       <Slider ref={sliderRef} {...settings}>
         {gallery?.map((item, index) => (
           <div key={index}>
-            {/* <img
+            <img
               src={`https://res.cloudinary.com/dneodtbad/image/upload/${item}`}
               className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[500px]"
               alt="gallery-image"
-            /> */}
-            <img src={item} alt={`Car ${index}`} />
+            />
+            {/* <img src={item} alt={`Car ${index}`} /> */}
           </div>
         ))}
       </Slider>
@@ -70,13 +69,13 @@ export function ProductSlider({ gallery }) {
       <div className="grid grid-cols-5 gap-4">
         {gallery?.map((item, index) => (
           <div key={index}>
-            {/* <img
+            <img
               onClick={() => sliderRef.current.slickGoTo(index)}
               src={`https://res.cloudinary.com/dneodtbad/image/upload/${item}`}
               className="h-24 w-24 cursor-pointer rounded-lg object-cover object-center"
               alt="gallery-image"
-            /> */}
-            <img src={item} alt={`Car ${index}`} />
+            />
+            {/* <img src={item} alt={`Car ${index}`} /> */}
           </div>
         ))}
       </div>

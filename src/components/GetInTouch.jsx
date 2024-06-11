@@ -57,7 +57,7 @@ export const GetInTouch = () => {
           </div>
           <div className="flex gap-2 items-center">
             <MdOutlineMarkEmailUnread className="text-2xl text-primary" />
-            <p>garirmela@gmail.com</p>
+            <p>garirmela54@gmail.com</p>
           </div>
           <ul className="flex items-center gap-4 text-2xl  mt-4">
             <li>

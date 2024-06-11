@@ -3,23 +3,24 @@ import { Link } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import { RiGasStationLine } from "react-icons/ri";
 import { PiRoadHorizonLight } from "react-icons/pi";
+import { MdOutlineSpeed } from "react-icons/md";
 export const CarGridView = ({ data }) => {
   const galleryArray = JSON.parse(data?.gallery);
 
   return (
     <div className="border border-gray-300 p-2 rounded-lg relative shadow-md">
       {/* Image */}
-      {/* <img
-        src={`https://res.cloudinary.com/dneodtbad/image/upload/${data?.gallery[0]}`}
-        alt={data?.title}
-        className="w-full h-60 rounded-lg"
-      /> */}
-
       <img
-        src={galleryArray[0]}
+        src={`https://res.cloudinary.com/dneodtbad/image/upload/${galleryArray[0]}`}
         alt={data?.title}
         className="w-full h-60 rounded-lg"
       />
+
+      {/* <img
+        src={galleryArray[0]}
+        alt={data?.title}
+        className="w-full h-60 rounded-lg"
+      /> */}
 
       {/* Ribbon or Chip */}
       <div className="absolute top-4 left-4 z-10">
@@ -31,7 +32,7 @@ export const CarGridView = ({ data }) => {
 
       {/* Content */}
       <div className="">
-        <Link to={`/car/${data?._id}`}>
+        <Link to={`/car/${data?.id}`}>
           <p className="text-xl font-bold text-black hover:text-primary">
             {data?.title}
           </p>
@@ -50,14 +51,14 @@ export const CarGridView = ({ data }) => {
       <div className="flex justify-between mb-2">
         <div className="flex items-center">
           <RiGasStationLine className="text-primary text-xl" />
-          {data?.fuelType.map((item, index) => (
+          {/* {data?.fuelType.map((item, index) => (
             <span className="text-md mx-1" key={index}>
               {item}
             </span>
-          ))}
+          ))} */}
         </div>
         <div className="flex items-center">
-          <PiRoadHorizonLight className="text-primary text-xl mr-1" />
+          <MdOutlineSpeed className="text-primary text-xl mr-1" />
           <span>{data?.engine_capacity} CC</span>
         </div>
       </div>

@@ -4,21 +4,42 @@ import { ServiceTitle } from "../components/ServiceTitle";
 export const Privacy = () => {
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Privacy Policy - Garir Mela</title>
-        <meta name="description" content="Privacy Policy outlines how we collect, use, disclose, and protect the
-          information provided to us through the garirmela.com" />
-        <meta name="keywords" content="garir mela, Dhaka, Car Wash, Car, Car Home Service" />
+        <meta
+          name="description"
+          content="Privacy Policy outlines how we collect, use, disclose, and protect the
+          information provided to us through the garirmela.com"
+        />
+        <meta
+          name="keywords"
+          content="garir mela, Dhaka, Car Wash, Car, Car Home Service"
+        />
         <meta name="author" content="GarirMela" />
         <meta property="og:title" content="Login - Garir Mela" />
-        <meta property="og:description" content="Privacy Policy outlines how we collect, use, disclose, and protect the
-          information provided to us through the garirmela.com" />
-        <meta property="og:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
-        <meta property="og:url" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta
+          property="og:description"
+          content="Privacy Policy outlines how we collect, use, disclose, and protect the
+          information provided to us through the garirmela.com"
+        />
+        <meta
+          property="og:image"
+          content={"https://themeearth.com/tf/html/carwash/img/service.jpg"}
+        />
+        <meta
+          property="og:url"
+          content={"https://themeearth.com/tf/html/carwash/img/service.jpg"}
+        />
         <meta name="twitter:title" content="Privacy Policy - Garir Mela" />
-        <meta name="twitter:description" content="Privacy Policy outlines how we collect, use, disclose, and protect the
-          information provided to us through the garirmela.com" />
-        <meta name="twitter:image" content={'https://themeearth.com/tf/html/carwash/img/service.jpg'} /> 
+        <meta
+          name="twitter:description"
+          content="Privacy Policy outlines how we collect, use, disclose, and protect the
+          information provided to us through the garirmela.com"
+        />
+        <meta
+          name="twitter:image"
+          content={"https://themeearth.com/tf/html/carwash/img/service.jpg"}
+        />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <ServiceTitle
@@ -87,13 +108,13 @@ export const Privacy = () => {
         <p>By using our website, you consent to our online Privacy Policy.</p>
         <h2>Updates to Privacy Policy</h2>
         <p>Any changes to our Privacy Policy will be posted on this page.</p>
-        <p>Email: garirmela@gmail.com</p>
+        <p>Email: garirmela54@gmail.com</p>
 
         <h2>Contact Us</h2>
         <p>
           If there are any questions regarding this Privacy Policy, you may
           contact us using the information below: GarirMela.com Dhaka,
-          Bangladesh garirmela@gmail.com
+          Bangladesh garirmela54@gmail.com
         </p>
         <p>
           This Privacy Policy for GarirMela.com is designed to align with the
