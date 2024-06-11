@@ -7,7 +7,7 @@ const DashboardLayout = () => {
     <div className="font-cabin font-normal">
       <Header />
       <div className=" container mx-auto mt-5 gap-6 lg:flex">
-      <div className="lg:w-2/12">
+        <div className="lg:w-2/12">
           <Sidebar />
         </div>
         <div className="lg:w-10/12">
