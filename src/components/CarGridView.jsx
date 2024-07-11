@@ -7,6 +7,8 @@ import { MdOutlineSpeed } from "react-icons/md";
 export const CarGridView = ({ data }) => {
   const galleryArray = JSON.parse(data?.gallery);
 
+  const fuel = data?.fuelType ? JSON.parse(data?.fuelType) : [];
+
   return (
     <div className="border border-gray-300 p-2 rounded-lg relative shadow-md">
       {/* Image */}
@@ -51,11 +53,11 @@ export const CarGridView = ({ data }) => {
       <div className="flex justify-between mb-2">
         <div className="flex items-center">
           <RiGasStationLine className="text-primary text-xl" />
-          {/* {data?.fuelType.map((item, index) => (
+          {fuel.map((item, index) => (
             <span className="text-md mx-1" key={index}>
-              {item}
+              {item.label}
             </span>
-          ))} */}
+          ))}
         </div>
         <div className="flex items-center">
           <MdOutlineSpeed className="text-primary text-xl mr-1" />

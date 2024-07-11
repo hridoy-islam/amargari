@@ -24,16 +24,22 @@ export function Single() {
       setCar(res.data.data);
     }
   };
+  // const fuelTypes = JSON.parse(car?.fuelType);
 
-  console.log(car?.gallery);
+  // console.log(fuelTypes);
+
+
+  console.log()
+  
 
   const galleryArray = car?.gallery ? JSON.parse(car.gallery) : [];
-
-  console.log(galleryArray);
+  const fuel = car?.fuelType ? JSON.parse(car?.fuelType) : [];
+  
 
   useEffect(() => {
     fetchData();
     window.scrollTo(0, 0);
+    
   }, [id]);
   return (
     <>
@@ -91,7 +97,7 @@ export function Single() {
                 <p>
                   {" "}
                   <span className="font-bold">Location</span> :{" "}
-                  {`${car?.upazila}, ${car?.district}, ${car?.division}`},
+                  {`${car?.upazila ? car.upazila + ', ' : ''}${car?.district ? car.district + ', ' : ''} ${car?.division || ''} ` }
                   Bangladesh
                 </p>
               </div>
@@ -160,11 +166,11 @@ export function Single() {
                   <RiGasStationLine className="text-primary text-4xl" />
                   <div>
                     <span className="font-bold text-lg">Fuel Type</span> <br />
-                    {/* {car?.fuelType.map((item, index) => (
+                    {fuel?.map((item, index) => (
                     <span className="text-md mx-1" key={index}>
                       {item.label}
                     </span>
-                  ))} */}
+                  ))}
                   </div>
                 </div>
               </Card>
